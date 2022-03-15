@@ -1,53 +1,89 @@
-// sampels & tutorials > codelabs > Designing a Flutter UI > Basic Flutter layout concepts
-// main_docs_layout2
-
+// 1분코딩 웹사이트 레이아웃
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
 
-void main() => runApp(MyApp());
+void showLayoutGuidelines() {
+  debugPaintSizeEnabled = true;
+}
+
+void showBaselines() {
+  debugPaintBaselinesEnabled = true;
+}
+
+void main() {
+  showLayoutGuidelines();
+  // showBaselines();
+  return runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        home:
+      title: '웹사이트: 1분코딩 레이아웃',
+      home:
 
-            // Container(
-            //     decoration: BoxDecoration(
-            //       border: Border.all(
-            //         color: Colors.lightGreen,
-            //         width: 8,
-            //       ),
-            //       borderRadius: BorderRadius.circular(12),
-            //     ),
-            //     child:
+          // Scaffold(
+          //     body:
 
-            Row(
-      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-      children: [
-        BlueBox(),
-        BlueBox(),
-        Expanded(
-          child: BlueBox(),
-        ),
-        BlueBox(),
-      ],
-    ));
+          AspectRatio(
+              // decoration: const BoxDecoration(
+              //   color: Colors.blueGrey,
+              // ),
+              aspectRatio: 3 / 2,
+              child: Column(
+                children: [
+                  _header(),
+                  Spacer(),
+                  _content(),
+                  Spacer(),
+                  _footer(),
+                ],
+              )
 
-    // ));
+              // )
+
+              ),
+    );
   }
-}
 
-class BlueBox extends StatelessWidget {
-  @override
-  Widget build(BuildContext context) {
-    return Container(
-      width: 50,
-      height: 50,
-      decoration: BoxDecoration(
-        color: Colors.blue,
-        border: Border.all(),
-      ),
+  Widget _header() {
+    return Row(
+      children: [
+        Column(children: [Text('good')])
+      ],
+    );
+  }
+
+  Widget _content() {
+    return Row(
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: [_contentLeft(), _contentCenter(), _contentRight()],
+    );
+  }
+
+  Widget _contentLeft() {
+    return Column(
+      children: [Text('good')],
+    );
+  }
+
+  Widget _contentCenter() {
+    return Column(
+      children: [Text('good')],
+    );
+  }
+
+  Widget _contentRight() {
+    return Column(
+      children: [Text('good')],
+    );
+  }
+
+  Widget _footer() {
+    return Row(
+      children: [Text('good')],
     );
   }
 }
