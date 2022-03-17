@@ -1,9 +1,20 @@
 // Development> ui > building layouts > tutorial
 // main_docs_layout1
+import 'package:flutter/rendering.dart';
 import 'package:flutter/material.dart';
 
+void showLayoutGuidelines() {
+  debugPaintSizeEnabled = true;
+}
+
+void showBaselines() {
+  debugPaintBaselinesEnabled = true;
+}
+
 void main() {
-  runApp(MyApp());
+  showLayoutGuidelines();
+  // showBaselines();
+  return runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
