@@ -1,6 +1,5 @@
 // 1분코딩 웹사이트 레이아웃
-import 'dart:ui';
-
+// import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 
@@ -10,6 +9,44 @@ void showLayoutGuidelines() {
 
 void showBaselines() {
   debugPaintBaselinesEnabled = true;
+}
+
+class CardInfo {
+  CardInfo({required this.url, required this.title});
+  String url;
+  String title;
+}
+
+List<CardInfo> cardList = [
+  CardInfo(url: 'https://picsum.photos/id/1/200/300', title: 'title1'),
+  CardInfo(url: 'https://picsum.photos/id/41/200/300', title: 'title4'),
+  CardInfo(url: 'https://picsum.photos/id/14/200/300', title: 'title4'),
+  CardInfo(url: 'https://picsum.photos/id/43/200/300', title: 'title4'),
+  CardInfo(url: 'https://picsum.photos/id/44/200/300', title: 'title4'),
+];
+
+class CustomCard extends StatelessWidget {
+  // const CustomCard({Key? key}) : super(key: key);
+  CustomCard(this.url, this.title);
+  String url;
+  String title;
+  @override
+  Widget build(BuildContext context) {
+    return Card(
+      child: Column(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Image.network(
+            url,
+            width: 100,
+            height: 100,
+            fit: BoxFit.cover,
+          ),
+          Text(title),
+        ],
+      ),
+    );
+  }
 }
 
 void main() {
@@ -376,6 +413,11 @@ class MyApp extends StatelessWidget {
   ]));
 
   Widget _contentCenter() {
+    List<CustomCard> cards = [];
+
+    for (var e in cardList) {
+      cards.add(new CustomCard(e.url, e.title));
+    }
     return Container(
         decoration: BoxDecoration(
           // color: Color.fromARGB(255, 247, 247, 244),
@@ -399,205 +441,220 @@ class MyApp extends StatelessWidget {
                         color: Colors.black,
                       ))
                 ])),
+
+            /* //1 map으로 구현
             Expanded(
                 flex: 16,
                 child: Row(
-                  children: [
-                    // Expanded(
-                    //     child: Column(children: [
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    // ])),
-                    // Expanded(
-                    //     child: Column(children: [
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    // ])),
-                    // Expanded(
-                    //     child: Column(children: [
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    // ])),
-                    // Expanded(
-                    //     child: Column(children: [
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    //   Expanded(
-                    //       child: Card(
-                    //     elevation: 0,
-                    //     child: Column(
-                    //       children: <Widget>[
-                    //         Image.asset(
-                    //           'images/lake.jpg',
-                    //           // width: 210,
-                    //           // height: 100,
-                    //           // fit: BoxFit.cover,
-                    //         ),
-                    //         const Text('Nouveautés'),
-                    //       ],
-                    //     ),
-                    //   )),
-                    // ])),
-                    card, card, card
-                  ],
-                )),
+                    children: cardList.map((e) {
+                  return CustomCard(e.url, e.title);
+                }).toList())), 
+            */
+            //2 for문으로 구현
+            Expanded(
+                flex: 16, child: Row(children: [for (var item in cards) item])),
+
+            /* //3 하드코딩 
+            Expanded(flex: 16, child: Row(children: [card, card, card])),
+ */
+            /* //4 하드코딩2
+            Expanded(
+                flex: 16,
+                child: Row(children: [
+                  Expanded(
+                      child: Column(children: [
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                  ])),
+                  Expanded(
+                      child: Column(children: [
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                  ])),
+                  Expanded(
+                      child: Column(children: [
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                  ])),
+                  Expanded(
+                      child: Column(children: [
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                    Expanded(
+                        child: Card(
+                      elevation: 0,
+                      child: Column(
+                        children: <Widget>[
+                          Image.asset(
+                            'images/lake.jpg',
+                            // width: 210,
+                            // height: 100,
+                            // fit: BoxFit.cover,
+                          ),
+                          const Text('Nouveautés'),
+                        ],
+                      ),
+                    )),
+                  ])),
+                ])),
+ */
             Expanded(
                 flex: 3,
                 child: Container(
