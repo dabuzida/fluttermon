@@ -47,7 +47,7 @@ class Grade extends StatelessWidget {
                 endIndent: 30,
               ),
               Text(
-                "NAME",
+                "NAME222",
                 style: TextStyle(
                   color: Colors.white,
                   letterSpacing: 2,
@@ -56,12 +56,7 @@ class Grade extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text("EVE",
-                  style: TextStyle(
-                      color: Colors.white,
-                      letterSpacing: 2,
-                      fontSize: 38,
-                      fontWeight: FontWeight.bold)),
+              Text("EVE", style: TextStyle(color: Colors.white, letterSpacing: 2, fontSize: 38, fontWeight: FontWeight.bold)),
               SizedBox(
                 height: 30,
               ),
@@ -75,12 +70,7 @@ class Grade extends StatelessWidget {
               SizedBox(
                 height: 10,
               ),
-              Text("15",
-                  style: TextStyle(
-                      color: Colors.white,
-                      letterSpacing: 2,
-                      fontSize: 38,
-                      fontWeight: FontWeight.bold)),
+              Text("15", style: TextStyle(color: Colors.white, letterSpacing: 2, fontSize: 38, fontWeight: FontWeight.bold)),
               SizedBox(
                 height: 30,
               ),
