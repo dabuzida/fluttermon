@@ -37,17 +37,7 @@ class MainPage extends StatelessWidget {
           //     padding: EdgeInsets.fromLTRB(50, 100, 0, 0),
           child: Column(
         mainAxisAlignment: MainAxisAlignment.center,
-        children: <Widget>[
-          Text("C"),
-          Text("C++"),
-          Text("JAVA"),
-          Text("JAVASCRIPT"),
-          Text("DART"),
-          Text("RUBY"),
-          Text("KOTLIN"),
-          Text("SWIFT"),
-          Text("PYTHON")
-        ],
+        children: <Widget>[Text("C111"), Text("C++"), Text("JAVA"), Text("JAVASCRIPT"), Text("DART"), Text("RUBY"), Text("KOTLIN"), Text("SWIFT"), Text("PYTHON")],
       )),
 
       // Center(
