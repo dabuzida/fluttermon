@@ -228,7 +228,7 @@ class MyApp extends StatelessWidget {
                 Container(
                     color: Colors.black,
                     child: Row(children: [
-                      const Text('유투브 111분코딩→',
+                      const Text('유투브 1분코딩→',
                           style: TextStyle(
                               fontSize: 14,
                               letterSpacing: 1,
