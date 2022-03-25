@@ -10,7 +10,7 @@ void showBaselines() {
 }
 
 void main() {
-  showLayoutGuidelines();
+  // showLayoutGuidelines();
   // showBaselines();
   return runApp(MyApp());
 }
@@ -20,11 +20,38 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        // debugShowCheckedModeBanner: false,
-        title: 'NAVER',
-        home: Scaffold(
-            // backgroundColor: Colors.black,
-            body: SingleChildScrollView(
+      // debugShowCheckedModeBanner: false,
+      title: 'NAVER',
+      home: Scaffold(
+        // backgroundColor: Colors.black,
+        body: Container(
+          decoration: BoxDecoration(
+            color: Color.fromRGBO(48, 210, 94, 1),
+            borderRadius: BorderRadius.all(
+              Radius.circular(100),
+            ),
+          ),
+          child: TextButton(
+            style: TextButton.styleFrom(
+              padding: const EdgeInsets.all(70.0),
+              primary: Color.fromARGB(255, 245, 4, 165),
+              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
+            ),
+            // onHover: (value) => print(value),
+            onPressed: () {
+              print('비용 알아보기');
+            },
+            child: const Text(
+              'sdkfjsdklfjlksdjfklsd',
+              style: TextStyle(
+                fontSize: 50,
+                color: Color.fromARGB(255, 199, 224, 53),
+              ),
+            ),
+          ),
+        ),
+
+        /* SingleChildScrollView(
           child: Container(
             // padding: EdgeInsets.fromLTRB(50),
             // margin: EdgeInsets.fromLTRB(1,1,1,),
@@ -35,21 +62,44 @@ class MyApp extends StatelessWidget {
                 Expanded(
                   flex: 11,
                   child: Container(
-                      margin: EdgeInsets.fromLTRB(356.5, 0, 356.5, 0),
-                      padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                      child: Row(children: [Text('d')])),
+                    margin: EdgeInsets.fromLTRB(356.5, 0, 356.5, 0),
+                    padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
+                    child: Row(
+                      children: [
+                        Text('d'),
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
                   flex: 3,
-                  child: Container(child: Row(children: [Text('d')])),
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Text('d'),
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
                   flex: 20,
-                  child: Container(child: Row(children: [Text('d')])),
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Text('d'),
+                      ],
+                    ),
+                  ),
                 ),
                 Expanded(
                   flex: 10,
-                  child: Container(child: Row(children: [Text('d')])),
+                  child: Container(
+                    child: Row(
+                      children: [
+                        Text('d'),
+                      ],
+                    ),
+                  ),
                 ),
                 // Column(children: [
                 //   Text('ddddddddddddddddddddddddddd',
@@ -61,6 +111,8 @@ class MyApp extends StatelessWidget {
               ],
             ),
           ),
-        )));
+        ), */
+      ),
+    );
   }
 }
