@@ -10,7 +10,7 @@ void showBaselines() {
 }
 
 void main() {
-  // showLayoutGuidelines();
+  showLayoutGuidelines();
   // showBaselines();
   return runApp(MyApp());
 }
@@ -24,30 +24,30 @@ class MyApp extends StatelessWidget {
       title: 'NAVER',
       home: Scaffold(
         // backgroundColor: Colors.black,
-        body: Container(
-          decoration: BoxDecoration(
-            color: Color.fromRGBO(48, 210, 94, 1),
-            borderRadius: BorderRadius.all(
-              Radius.circular(100),
-            ),
-          ),
-          child: TextButton(
-            style: TextButton.styleFrom(
-              padding: const EdgeInsets.all(70.0),
-              primary: Color.fromARGB(255, 245, 4, 165),
-              shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(100)),
-            ),
-            // onHover: (value) => print(value),
-            onPressed: () {
-              print('비용 알아보기');
-            },
-            child: const Text(
-              'sdkfjsdklfjlksdjfklsd',
-              style: TextStyle(
-                fontSize: 50,
-                color: Color.fromARGB(255, 199, 224, 53),
+        // padding: EdgeInsets.symmetric(vertical: 60, horizontal: 50),
+
+        body: SizedBox(
+          height: 200,
+          child: Row(
+            children: const <Widget>[
+              Text(
+                'aaa',
+                style: TextStyle(
+                  height: 1.3,
+                  fontSize: 50,
+                  color: Color.fromARGB(255, 119, 53, 224),
+                ),
               ),
-            ),
+              FittedBox(
+                child: Text(
+                  'ipsuackgroundColom\ngndColoackgrouoose',
+                  style: TextStyle(
+                    fontSize: 50,
+                    color: Color.fromARGB(255, 199, 224, 53),
+                  ),
+                ),
+              ),
+            ],
           ),
         ),
 
