@@ -16,38 +16,35 @@ void main() {
 }
 
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
+  const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return const MaterialApp(
       // debugShowCheckedModeBanner: false,
       title: 'NAVER',
       home: Scaffold(
-        // backgroundColor: Colors.black,
-        // padding: EdgeInsets.symmetric(vertical: 60, horizontal: 50),
-
-        body: SizedBox(
-          height: 200,
-          child: Row(
-            children: const <Widget>[
-              Text(
+        body: Center(
+          child: SizedBox(
+            width: 100,
+            height: 100,
+            child: FittedBox(
+              // fit: BoxFit.contain,
+              // fit: BoxFit.cover,
+              // fit: BoxFit.fill,
+              // fit: BoxFit.fitHeight,
+              // fit: BoxFit.fitWidth,
+              // fit: BoxFit.scaleDown,
+              // fit: BoxFit.none,
+              child: Text(
                 'aaa',
                 style: TextStyle(
                   height: 1.3,
                   fontSize: 50,
-                  color: Color.fromARGB(255, 119, 53, 224),
+                  fontWeight: FontWeight.w700,
+                  color: Color.fromARGB(255, 41, 10, 180),
                 ),
               ),
-              FittedBox(
-                child: Text(
-                  'ipsuackgroundColom\ngndColoackgrouoose',
-                  style: TextStyle(
-                    fontSize: 50,
-                    color: Color.fromARGB(255, 199, 224, 53),
-                  ),
-                ),
-              ),
-            ],
+            ),
           ),
         ),
 
