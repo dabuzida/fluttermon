@@ -10,7 +10,7 @@ void showBaselines() {
 }
 
 void main() {
-  showLayoutGuidelines();
+  // showLayoutGuidelines();
   // showBaselines();
   return runApp(MyApp());
 }
@@ -19,97 +19,147 @@ class MyApp extends StatelessWidget {
   const MyApp({Key? key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    return const MaterialApp(
+    final List<String> entries = <String>['A', 'B', 'C'];
+    final List<int> colorCodes = <int>[600, 500, 100];
+
+    Widget listView = ListView(
+      padding: const EdgeInsets.all(8),
+      children: <Widget>[
+        Text('listView'),
+        for (var i = 0; i < 2000; i++) item('listView'),
+      ],
+    );
+    final List<String> color = <String>['red', 'blue', 'green'];
+    Widget listViewBuilder = ListView.builder(
+      padding: const EdgeInsets.all(8),
+      itemCount: 6000,
+      itemBuilder: (BuildContext context, int index) {
+        return Container(
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 23, 20, 204),
+            // color: Colors.'${color}',
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.white,
+                width: 5,
+                style: BorderStyle.solid,
+              ),
+            ),
+          ),
+          height: 50,
+          child: const Center(
+            child: Text(
+              'listViewBuilder',
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        );
+      },
+    );
+    Widget singleChildScrollView = SingleChildScrollView(
+      padding: const EdgeInsets.all(8),
+      child: Column(
+        children: [
+          Text('singleChildScrollView'),
+          for (var i = 0; i < 5000; i++) item('singleChildScrollView'),
+        ],
+      ),
+    );
+
+    return MaterialApp(
       // debugShowCheckedModeBanner: false,
-      title: 'NAVER',
+      title: 'f-mon',
       home: Scaffold(
-        body: Center(
-          child: SizedBox(
-            width: 100,
-            height: 100,
-            child: FittedBox(
-              // fit: BoxFit.contain,
-              // fit: BoxFit.cover,
-              // fit: BoxFit.fill,
-              // fit: BoxFit.fitHeight,
-              // fit: BoxFit.fitWidth,
-              // fit: BoxFit.scaleDown,
-              // fit: BoxFit.none,
-              child: Text(
-                'aaa',
-                style: TextStyle(
-                  height: 1.3,
-                  fontSize: 50,
-                  fontWeight: FontWeight.w700,
-                  color: Color.fromARGB(255, 41, 10, 180),
-                ),
+        appBar: AppBar(
+          title: const Text('ListView vs ListView.builder vs SingleChildScrollView+Column'),
+          backgroundColor: const Color.fromARGB(255, 17, 180, 80),
+          centerTitle: true,
+          // elevation: 0,
+        ),
+        body: listView,
+        // body: listViewBuilder,
+        // body: singleChildScrollView,
+      ),
+    );
+  }
+
+  Widget item(String identifierText) {
+    return Column(
+      children: <Widget>[
+        Container(
+          decoration: BoxDecoration(
+            color: Colors.red[600],
+            border: const Border(
+              bottom: BorderSide(
+                color: Colors.white,
+                width: 5,
+                style: BorderStyle.solid,
+              ),
+            ),
+          ),
+          height: 50,
+          child: Center(
+            child: Text(
+              identifierText,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
               ),
             ),
           ),
         ),
-
-        /* SingleChildScrollView(
-          child: Container(
-            // padding: EdgeInsets.fromLTRB(50),
-            // margin: EdgeInsets.fromLTRB(1,1,1,),
-            color: Colors.white,
-            height: 1100,
-            child: Column(
-              children: [
-                Expanded(
-                  flex: 11,
-                  child: Container(
-                    margin: EdgeInsets.fromLTRB(356.5, 0, 356.5, 0),
-                    padding: EdgeInsets.fromLTRB(30, 0, 30, 0),
-                    child: Row(
-                      children: [
-                        Text('d'),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 3,
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Text('d'),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 20,
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Text('d'),
-                      ],
-                    ),
-                  ),
-                ),
-                Expanded(
-                  flex: 10,
-                  child: Container(
-                    child: Row(
-                      children: [
-                        Text('d'),
-                      ],
-                    ),
-                  ),
-                ),
-                // Column(children: [
-                //   Text('ddddddddddddddddddddddddddd',
-                //       style: const TextStyle(
-                //         fontSize: 100,
-                //         letterSpacing: 1,
-                //       ))
-                // ]),
-              ],
+        Container(
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 7, 167, 68),
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.white,
+                width: 5,
+                style: BorderStyle.solid,
+              ),
             ),
           ),
-        ), */
-      ),
+          height: 50,
+          child: Center(
+            child: Text(
+              identifierText,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+        Container(
+          decoration: const BoxDecoration(
+            color: Color.fromARGB(255, 23, 20, 204),
+            border: Border(
+              bottom: BorderSide(
+                color: Colors.white,
+                width: 5,
+                style: BorderStyle.solid,
+              ),
+            ),
+          ),
+          height: 50,
+          child: Center(
+            child: Text(
+              identifierText,
+              style: TextStyle(
+                fontSize: 20,
+                fontWeight: FontWeight.w700,
+                color: Colors.white,
+              ),
+            ),
+          ),
+        ),
+      ],
     );
   }
 }
