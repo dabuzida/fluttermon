@@ -8,6 +8,7 @@ class Test3 extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       height: 200,
+      width: 400,
       child: Expanded(
         child: Image(
           image: NetworkImage(_1vs1),

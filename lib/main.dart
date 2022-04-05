@@ -13,147 +13,53 @@ void showBaselines() {
 }
 
 void main() {
-  showLayoutGuidelines();
-  showBaselines();
+  // showLayoutGuidelines();
+
+  // showBaselines();
   return runApp(MyApp());
 }
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
-
   String _1vs1 = 'https://cglink.com/files/attach/images/1589/713/001/UV.Grid.jpg';
   String _2vs3 = 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnVpbGRpbmd8ZW58MHx8MHx8&w=1000&q=80';
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      home: Scaffold(
-        body: Row(
-          children: [
-            // Test3(),
-
-            AspectRatio(
-              aspectRatio: 1,
-              child: Image(
-                image: NetworkImage('https://i.redd.it/9iwrq45s12e31.jpg'),
-                // fit: BoxFit.fill,
-              ),
+        title: 'Constraint Sample',
+        // debugShowCheckedModeBanner: false,
+        home: Center(
+          child: Container(
+            color: Colors.green,
+            alignment: Alignment.center,
+            constraints: const BoxConstraints(
+              maxHeight: 300.0,
+              maxWidth: 300.0,
+              minWidth: 300.0,
+              minHeight: 300.0,
             ),
-
-            // Row(
-            //   children: [
-            //     Container(
-            //       width: 50,
-            //       height: 200,
-            //       color: Colors.amber,
-            //     )
-            //   ],
-            // ),
-
-            /* Row(
-              children: [
-                Container(
-                  width: 300,
-                  height: 300,
-                  child: Image(
-                    image: NetworkImage(_1vs1),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  height: 300,
-                  child: Image(
-                    image: NetworkImage(_2vs3),
-                  ),
-                ),
-                Container(
-                  width: 300,
-                  height: 300,
-                  child: AspectRatio(
-                    aspectRatio: 1 / 2,
-                    child: Image(
-                      image: NetworkImage(_2vs3),
-                      fit: BoxFit.contain,
-                    ),
-                  ),
-                  // child: Image(image: AssetImage('assets/pikachu.jpg')),
-                  // child: const AspectRatio(aspectRatio: 1, child: Image(image: AssetImage('assets/pikachu.jpg'), fit: BoxFit.cover)),
-                ),
-                Container(
-                  width: 300,
-                  // height: 300,
-                  child: AspectRatio(
-                    aspectRatio: 1,
-                    child: Container(
-                      color: Colors.amber,
-                      width: 10,
-                      height: 10,
-                    ),
-                  ),
-                ),
-        
-                /* Container(
-              padding: const EdgeInsets.all(11),
-              child: Expanded(
-                child: MouseRegion(
-                  cursor: SystemMouseCursors.click,
-                  child: GestureDetector(
-                    child: Column(
-                      children: const <Widget>[
-                        AspectRatio(
-                          aspectRatio: 1.0,
-                          child: Image(
-                            image: AssetImage('assets/pikachu.jpg'),
-                            fit: BoxFit.cover,
-                          ),
-                        ),
-                      ],
-                    ),
-                  ),
-                ),
-              ),
-              ), */
-              ],
-            ),
-            Row(
-              children: [
-                Container(
-                  color: Colors.blue,
-                  height: 100.0,
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Container(
-                      color: Colors.amberAccent,
-                    ),
-                  ),
-                ),
-                Container(
-                  color: Colors.blue,
-                  width: 100.0,
-                  child: AspectRatio(
-                    aspectRatio: 16 / 9,
-                    child: Container(
-                      color: Colors.amberAccent,
-                    ),
-                  ),
-                ),
-                Container(
-                  height: 300,
-                  width: 300,
-                  child: Expanded(
-                    child: AspectRatio(
-                      aspectRatio: 1,
-                      child: Image(
-                        image: NetworkImage(_1vs1),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ), */
-          ],
+            child: (Text(
+              'asdfsdfsdfdasdfsdfsdfsdasdfsdfsdfsd',
+            )),
+          ),
+        )
+        /* Scaffold(
+        body: Container(
+          constraints: BoxConstraints(
+            maxHeight: 700,
+            maxWidth: 700,
+          ),
+          color: Colors.amber,
+          // height: 500,
+          // width: 500,
+          child: Container(
+            color: Colors.blue,
+            width: 300,
+            height: 300,
+          ),
         ),
-      ),
-    );
+      ), */
+        );
   }
 
 /* 
