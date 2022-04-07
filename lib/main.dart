@@ -30,134 +30,155 @@ class MyApp extends StatelessWidget {
       // debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SingleChildScrollView(
-          child: Column(
+          child: /* testctn(), */
+              Column(
             children: <Widget>[
               Row(
-                children: <Widget>[
-                  ctn(50, 50, 0xff33ffff),
-                  ctn(50, 50, 0xffcc0000),
-                  ctn(50, 50, 0xffccff00),
-                  ctn(50, 50, 0xff3366cc),
-                  ctn(50, 50, 0xff003300),
-                  ctn(50, 50, 0xff00FF99),
-                  ctn(50, 50, 0xffFFCC00),
-                  ctn(50, 50, 0xff9966FF),
-                  ctn(50, 50, 0xff663300),
-                  ctn(50, 50, 0xff669999),
-                  ctn(50, 50, 0xff00FF99),
-                  ctn(50, 50, 0xff99CC00),
-                  ctn(50, 50, 0xff33ffff),
-                  ctn(50, 50, 0xffcc0000),
-                  ctn(50, 50, 0xffccff00),
-                  ctn(50, 50, 0xff3366cc),
-                  ctn(50, 50, 0xff003300),
-                  ctn(50, 50, 0xff00FF99),
-                  ctn(50, 50, 0xffFFCC00),
-                  ctn(50, 50, 0xff9966FF),
-                  ctn(50, 50, 0xff663300),
-                  ctn(50, 50, 0xff669999),
-                  ctn(50, 50, 0xff00FF99),
-                  ctn(50, 50, 0xff99CC00),
-                  ctn(50, 50, 0xff33ffff),
-                  ctn(50, 50, 0xffcc0000),
-                  ctn(50, 50, 0xffccff00),
-                  ctn(50, 50, 0xff3366cc),
-                  ctn(50, 50, 0xff003300),
-                  ctn(50, 50, 0xff00FF99),
-                  ctn(50, 50, 0xffFFCC00),
-                  ctn(50, 50, 0xff9966FF),
-                  ctn(50, 50, 0xff663300),
-                  ctn(50, 50, 0xff669999),
-                  ctn(50, 50, 0xff00FF99),
-                ],
-              ),
-              Container(
-                width: double.infinity,
-                height: 5,
-                color: const Color(0xffff0000),
-              ),
-              Row(
-                children: <Widget>[],
-              ),
-              Container(
-                width: double.infinity,
-                height: 5,
-                color: const Color(0xffff0000),
-              ),
-              Row(
+                mainAxisSize: MainAxisSize.max,
                 children: <Widget>[
                   Container(
-                    constraints: const BoxConstraints(
-                      minWidth: 300,
-                      minHeight: 300,
-                      maxWidth: 400,
-                      maxHeight: 400,
-                    ),
-                    color: const Color(0xff000000),
-                  ),
-                  Container(
-                    width: 200,
-                    height: 200,
-                    constraints: const BoxConstraints(
-                      minWidth: 300,
-                      minHeight: 300,
-                      maxWidth: 400,
-                      maxHeight: 400,
-                    ),
-                    color: const Color(0xff6699FF),
-                  ),
-                  Container(
-                    width: 350,
-                    height: 350,
-                    constraints: const BoxConstraints(
-                      minWidth: 300,
-                      minHeight: 300,
-                      maxWidth: 400,
-                      maxHeight: 400,
-                    ),
-                    color: const Color(0xffee1155),
-                    child: Container(
-                      width: 200,
-                      height: 200,
-                      color: Color(0xff778833),
-                    ),
-                  ),
-                  Container(
-                    // width: 300,
-                    // height: 300,
-                    constraints: const BoxConstraints(
-                      minWidth: 300,
-                      minHeight: 300,
-                      // maxWidth: 400,
-                      // maxHeight: 400,
-                    ),
-                    color: const Color(0xff99bbcc),
-                    child: Container(
-                      width: 100,
-                      height: 100,
-                      color: Color(0xff44dd99),
-                    ),
-                  ),
-                  //
-
-                  Container(
-                    constraints: const BoxConstraints(
-                      minWidth: 300,
-                      minHeight: 300,
-                      maxWidth: 400,
-                      maxHeight: 400,
-                    ),
-                    color: const Color(0xff786858),
-                    child: Container(
-                      color: const Color(0xffffff00),
-                      width: 2250,
-                      height: 2250,
-                    ),
-                  ),
+                    width: 50,
+                    height: 50,
+                    color: Color(0xff445566),
+                  )
                 ],
-              ),
+              )
             ],
-            /* child: Center(
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget testctn() {
+    return Column(
+      children: <Widget>[
+        Row(
+          children: <Widget>[
+            ctn(50, 50, 0xff33ffff),
+            ctn(50, 50, 0xffcc0000),
+            ctn(50, 50, 0xffccff00),
+            ctn(50, 50, 0xff3366cc),
+            ctn(50, 50, 0xff003300),
+            ctn(50, 50, 0xff00FF99),
+            ctn(50, 50, 0xffFFCC00),
+            ctn(50, 50, 0xff9966FF),
+            ctn(50, 50, 0xff663300),
+            ctn(50, 50, 0xff669999),
+            ctn(50, 50, 0xff00FF99),
+            ctn(50, 50, 0xff99CC00),
+            ctn(50, 50, 0xff33ffff),
+            ctn(50, 50, 0xffcc0000),
+            ctn(50, 50, 0xffccff00),
+            ctn(50, 50, 0xff3366cc),
+            ctn(50, 50, 0xff003300),
+            ctn(50, 50, 0xff00FF99),
+            ctn(50, 50, 0xffFFCC00),
+            ctn(50, 50, 0xff9966FF),
+            ctn(50, 50, 0xff663300),
+            ctn(50, 50, 0xff669999),
+            ctn(50, 50, 0xff00FF99),
+            ctn(50, 50, 0xff99CC00),
+            ctn(50, 50, 0xff33ffff),
+            ctn(50, 50, 0xffcc0000),
+            ctn(50, 50, 0xffccff00),
+            ctn(50, 50, 0xff3366cc),
+            ctn(50, 50, 0xff003300),
+            ctn(50, 50, 0xff00FF99),
+            ctn(50, 50, 0xffFFCC00),
+            ctn(50, 50, 0xff9966FF),
+            ctn(50, 50, 0xff663300),
+            ctn(50, 50, 0xff669999),
+            ctn(50, 50, 0xff00FF99),
+          ],
+        ),
+        Container(
+          width: double.infinity,
+          height: 5,
+          color: const Color(0xffff0000),
+        ),
+        Row(
+          children: <Widget>[],
+        ),
+        Container(
+          width: double.infinity,
+          height: 5,
+          color: const Color(0xffff0000),
+        ),
+        Row(
+          children: <Widget>[
+            Container(
+              constraints: const BoxConstraints(
+                minWidth: 300,
+                minHeight: 300,
+                maxWidth: 400,
+                maxHeight: 400,
+              ),
+              color: const Color(0xff000000),
+            ),
+            Container(
+              width: 200,
+              height: 200,
+              constraints: const BoxConstraints(
+                minWidth: 300,
+                minHeight: 300,
+                maxWidth: 400,
+                maxHeight: 400,
+              ),
+              color: const Color(0xff6699FF),
+            ),
+            Container(
+              width: 350,
+              height: 350,
+              constraints: const BoxConstraints(
+                minWidth: 300,
+                minHeight: 300,
+                maxWidth: 400,
+                maxHeight: 400,
+              ),
+              color: const Color(0xffee1155),
+              child: Container(
+                width: 200,
+                height: 200,
+                color: Color(0xff778833),
+              ),
+            ),
+            Container(
+              // width: 300,
+              // height: 300,
+              constraints: const BoxConstraints(
+                minWidth: 300,
+                minHeight: 300,
+                // maxWidth: 400,
+                // maxHeight: 400,
+              ),
+              color: const Color(0xff99bbcc),
+              child: Container(
+                width: 100,
+                height: 100,
+                color: Color(0xff44dd99),
+              ),
+            ),
+            //
+
+            Container(
+              constraints: const BoxConstraints(
+                minWidth: 300,
+                minHeight: 300,
+                maxWidth: 400,
+                maxHeight: 400,
+              ),
+              color: const Color(0xff786858),
+              child: Container(
+                color: const Color(0xffffff00),
+                width: 2250,
+                height: 2250,
+              ),
+            ),
+          ],
+        ),
+      ],
+      /* child: Center(
                 child: Container(
                   color: Colors.green,
                   alignment: Alignment.center,
@@ -172,9 +193,6 @@ class MyApp extends StatelessWidget {
                   )),
                 ),
               ), */
-          ),
-        ),
-      ),
     );
   }
 
