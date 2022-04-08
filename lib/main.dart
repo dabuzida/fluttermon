@@ -14,10 +14,36 @@ void showBaselines() {
 
 void main() {
   showLayoutGuidelines();
-
   // showBaselines();
-  return runApp(MyApp());
+
+  showData();
+  
+  
+  // return runApp(MyApp());
 }
+
+void showData(){
+  startTask();
+  accessData();
+  fetchData();
+}
+
+void startTask(){
+  String info1 = "요청수행 시작";
+  print(info1);
+}
+
+void accessData(){
+  String info2 = '데이터에 접속중';
+  print(info2);
+}
+
+void fetchData(){
+  String info3 = '잔액은 1000원 입니다';
+  print(info3);
+}
+
+
 
 class MyApp extends StatelessWidget {
   MyApp({Key? key}) : super(key: key);
@@ -31,20 +57,7 @@ class MyApp extends StatelessWidget {
       home: Scaffold(
         body: SingleChildScrollView(
           child: /* testctn(), */
-              Column(
-            children: <Widget>[
-              Row(
-                mainAxisSize: MainAxisSize.max,
-                children: <Widget>[
-                  Container(
-                    width: 50,
-                    height: 50,
-                    color: Color(0xff445566),
-                  )
-                ],
-              )
-            ],
-          ),
+              
         ),
       ),
     );
