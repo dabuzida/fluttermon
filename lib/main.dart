@@ -15,33 +15,9 @@ void showBaselines() {
 void main() {
   showLayoutGuidelines();
   // showBaselines();
-
-  showData();
-  
-  
   // return runApp(MyApp());
 }
 
-void showData(){
-  startTask();
-  accessData();
-  fetchData();
-}
-
-void startTask(){
-  String info1 = "요청수행 시작";
-  print(info1);
-}
-
-void accessData(){
-  String info2 = '데이터에 접속중';
-  print(info2);
-}
-
-void fetchData(){
-  String info3 = '잔액은 1000원 입니다';
-  print(info3);
-}
 
 
 
@@ -109,9 +85,6 @@ class MyApp extends StatelessWidget {
           width: double.infinity,
           height: 5,
           color: const Color(0xffff0000),
-        ),
-        Row(
-          children: <Widget>[],
         ),
         Container(
           width: double.infinity,
