@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttermon/calculator.dart';
 import 'package:fluttermon/test3.dart';
 
 import 'test1.dart';
@@ -12,28 +13,47 @@ void showBaselines() {
   debugPaintBaselinesEnabled = true;
 }
 
+String _1vs1 = 'https://cglink.com/files/attach/images/1589/713/001/UV.Grid.jpg';
+String _2vs3 = 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnVpbGRpbmd8ZW58MHx8MHx8&w=1000&q=80';
 void main() {
-  showLayoutGuidelines();
+  // showLayoutGuidelines();
   // showBaselines();
-  // return runApp(MyApp());
+  return runApp(const MyApp());
 }
 
-
-
-
 class MyApp extends StatelessWidget {
-  MyApp({Key? key}) : super(key: key);
-  String _1vs1 = 'https://cglink.com/files/attach/images/1589/713/001/UV.Grid.jpg';
-  String _2vs3 = 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnVpbGRpbmd8ZW58MHx8MHx8&w=1000&q=80';
+  const MyApp({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return const MaterialApp(
+      title: 'computer',
+      // debugShowCheckedModeBanner: false,
+      home: Scaffold(
+        body: Center(
+          child: Calculator(),
+        ),
+      ),
+    );
+  }
+}
+
+class MyApp2 extends StatefulWidget {
+  const MyApp2({Key? key}) : super(key: key);
+
+  @override
+  State<MyApp2> createState() => _MyApp2State();
+}
+
+class _MyApp2State extends State<MyApp2> {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Constraint Sample',
+      title: 'computer',
       // debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SingleChildScrollView(
-          child: /* testctn(), */
-              
+          child: testctn(),
         ),
       ),
     );
@@ -126,7 +146,7 @@ class MyApp extends StatelessWidget {
               child: Container(
                 width: 200,
                 height: 200,
-                color: Color(0xff778833),
+                color: const Color(0xff778833),
               ),
             ),
             Container(
@@ -142,7 +162,7 @@ class MyApp extends StatelessWidget {
               child: Container(
                 width: 100,
                 height: 100,
-                color: Color(0xff44dd99),
+                color: const Color(0xff44dd99),
               ),
             ),
             //
