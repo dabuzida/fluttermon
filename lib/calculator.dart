@@ -9,8 +9,8 @@ class Calculator extends StatefulWidget {
 
 class _CalculatorState extends State<Calculator> {
   double result = 0;
-  double? x;
-  double? y;
+  double? x = 1;
+  double? y = 2;
 
   void add(double p, double q) {
     setState(() {
@@ -63,11 +63,18 @@ class _CalculatorState extends State<Calculator> {
             ),
             Row(
               children: <Widget>[
-                createOperation('+', 'add'),
-                createOperation('-', 'subtract'),
-                createOperation('*', 'multiply'),
-                createOperation('/', 'divide'),
-                createOperation('C', 'divide'),
+                TextButton(
+                  child: Text(
+                    '+',
+                    style: const TextStyle(color: Colors.white),
+                  ),
+                  onPressed: () => add(x!, y!),
+                )
+                // createOperation('+', 'add'),
+                // createOperation('-', 'subtract'),
+                // createOperation('*', 'multiply'),
+                // createOperation('/', 'divide'),
+                // createOperation('C', 'divide'),
               ],
             ),
             Row(
