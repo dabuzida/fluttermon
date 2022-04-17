@@ -33,10 +33,10 @@ class MyApp extends StatelessWidget {
       title: 'computer',
       // debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: Center(
+        body: Calculator(),
+        /* Center(
           child: Red(),
-          // Calculator(),
-        ),
+        ), */
       ),
     );
   }
