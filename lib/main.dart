@@ -4,6 +4,7 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttermon/calculator.dart';
+import 'package:fluttermon/calculator2.dart';
 import 'package:fluttermon/test3.dart';
 
 import 'test1.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
       // debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.green,
-        body: Calculator(),
+        body: Calculator2(),
         /* Center(
           child: Red(),
         ), */
