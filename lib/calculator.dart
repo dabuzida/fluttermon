@@ -5,27 +5,30 @@ class Calculator extends StatefulWidget {
 
   @override
   State<Calculator> createState() {
-    print('Calculator() -> createState()');
+    // print('Calculator() -> createState()');
     return _CalculatorState();
   }
 }
 
 class _CalculatorState extends State<Calculator> {
-  String output = '0';
   String equation = '';
+  String output = '0';
   double result = 0;
+  double? tempMemory;
+  var acceptor = [];
+  // var acceptor = [null, null, null];
 
   @override
   Widget build(BuildContext context) {
-    print('_CalculatorState()');
+    // print('_CalculatorState()');
     return Center(
       child: SizedBox(
         width: 600,
         height: 600,
         child: Container(
-          color: const Color.fromARGB(183, 226, 226, 226),
+          color: Color.fromARGB(255, 204, 201, 201),
           child: Column(
-            crossAxisAlignment: CrossAxisAlignment.end,
+            // crossAxisAlignment: CrossAxisAlignment.end,
             children: <Widget>[
               Expanded(
                 child: Column(
@@ -41,7 +44,7 @@ class _CalculatorState extends State<Calculator> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         const Text('결과'),
-                        Text('$output', style: const TextStyle(fontSize: 50)),
+                        Text(output, style: const TextStyle(fontSize: 50)),
                       ],
                     ),
                   ],
@@ -97,34 +100,85 @@ class _CalculatorState extends State<Calculator> {
         child: Text(sign, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 0, 0, 0))),
         onPressed: () => {
           setState(() {
-            String lastChar = equation.substring(equation.length - 1);
+            // print(11);
             switch (sign) {
               case '+':
                 {
-                  if (lastChar != '+' && lastChar != '-' && lastChar != '×' && lastChar != '÷')
-                    setState(() {
-                      equation = output + '+';
-                    });
+                  if (acceptor.length == 2) {
+                    acceptor[1] = '+';
+                    equation = output + '+';
+                    break;
+                  }
+                  if (tempMemory != null) {
+                    output = tempMemory.toString();
+                    equation = output + '+';
+                    acceptor.addAll([tempMemory, '+']);
+                    break;
+                  }
+                  equation = output + '+';
+                  acceptor.add('+');
+                  break;
                 }
-                break;
               case '-':
-                clear();
-                break;
+                {
+                  if (acceptor.length == 2) {
+                    acceptor[1] = '-';
+                    equation = output + '-';
+                    break;
+                  }
+                  if (tempMemory != null) {
+                    output = tempMemory.toString();
+                    equation = output + '-';
+                    acceptor.addAll([tempMemory, '-']);
+                    break;
+                  }
+                  equation = output + '-';
+                  acceptor.add('-');
+                  break;
+                }
               case '×':
-                clear();
-                break;
+                {
+                  if (acceptor.length == 2) {
+                    acceptor[1] = '×';
+                    equation = output + '×';
+                    break;
+                  }
+                  if (tempMemory != null) {
+                    output = tempMemory.toString();
+                    equation = output + '×';
+                    acceptor.addAll([tempMemory, '×']);
+                    break;
+                  }
+                  equation = output + '×';
+                  acceptor.add('×');
+                  break;
+                }
               case '÷':
-                clear();
-                break;
+                {
+                  if (acceptor.length == 2) {
+                    acceptor[1] = '÷';
+                    equation = output + '÷';
+                    break;
+                  }
+                  if (tempMemory != null) {
+                    output = tempMemory.toString();
+                    equation = output + '÷';
+                    acceptor.addAll([tempMemory, '÷']);
+                    break;
+                  }
+                  equation = output + '÷';
+                  acceptor.add('÷');
+                  break;
+                }
               case 'C':
-                setState(() {
-                  output = '0';
-                  equation = '';
-                  result = 0;
-                });
+                output = '0';
+                equation = '';
+                result = 0;
+                tempMemory = null;
+                acceptor = [];
                 break;
               case '=':
-                output = result.toString();
+                equal(acceptor);
                 break;
               default:
             }
@@ -149,35 +203,76 @@ class _CalculatorState extends State<Calculator> {
         child: Text(number, style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
         onPressed: () => {
           setState(() {
-            print('add');
-            if (output == '0') {
-              output = '';
+            if (acceptor.length == 0 /* || acceptor[0] == 0 */) {
+              print('1');
+              equation = '';
+              tempMemory = null;
+              output = number;
+              // acceptor[0] = _number;
+              acceptor.add(_number);
+            } else if (acceptor.length == 1 && acceptor[0] != 0 /* && acceptor[0] != 0 */) {
+              print('2');
+              output += number;
+              acceptor[0] = double.parse(output);
+            } else if (acceptor.length == 2) {
+              print('3');
+              output = number;
+              acceptor.add(_number);
+            } else if (acceptor.length == 3 && acceptor[2] != 0) {
+              print('4');
+              output += number;
+              acceptor[2] = double.parse(output);
             }
-            output += number;
-            result = double.parse(output);
-            print(result);
+
+            /* else {
+              print('5');
+              // clear();
+              equation = '';
+              acceptor = [];
+              output = number;
+              acceptor.add(_number);
+            } */
           })
         },
       ),
     ));
   }
 
-  void clear() {
+  void equal(var array) {
+    double num1 = array[0];
+    String sign = array[1];
+    double num2 = array[2];
+    switch (sign) {
+      case '+':
+        result = num1 + num2;
+        break;
+      case '-':
+        result = num1 - num2;
+        break;
+      case '×':
+        result = num1 * num2;
+        break;
+      case '÷':
+        result = num1 / num2;
+        break;
+      default:
+    }
+    equation += num2.toString();
+    output = result.toString();
+    tempMemory = result;
+    acceptor = [];
+  }
+
+  /*  void clear() {
     setState(() {
       output = '0';
       equation = '';
       result = 0;
+      acceptor = [];
     });
-  }
+  } */
 
-  void equal() {
-    setState(() {
-      // equation = ;
-      output = result.toString();
-    });
-  }
-
-  void add(double prevVal, double currVal) {
+  /*  void add(double prevVal, double currVal) {
     setState(() {});
   }
 
@@ -200,5 +295,5 @@ class _CalculatorState extends State<Calculator> {
     setState(() {
       // result = prevVal / currVal;
     });
-  }
+  } */
 }

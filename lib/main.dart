@@ -19,7 +19,16 @@ void showBaselines() {
 String _1vs1 = 'https://cglink.com/files/attach/images/1589/713/001/UV.Grid.jpg';
 String _2vs3 = 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnVpbGRpbmd8ZW58MHx8MHx8&w=1000&q=80';
 void main() {
-  print('main()');
+/* 발견된 버그
+
+0누르다가 1~9누르면 수 바뀌게
+
+배열생성시 크기 3인걸로 애초에 생성
+
+첫번째숫자만 다쓰고 = 누를때도 첫번째 숫자 출력되도록
+ */
+
+  // print('main()');
   // showLayoutGuidelines();
   // showBaselines();
   return runApp(const MyApp());
@@ -30,11 +39,12 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    print('MyApp');
+    // print('MyApp');
     return const MaterialApp(
       title: 'computer',
       // debugShowCheckedModeBanner: false,
       home: Scaffold(
+        backgroundColor: Colors.green,
         body: Calculator(),
         /* Center(
           child: Red(),
