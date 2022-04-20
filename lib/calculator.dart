@@ -203,14 +203,16 @@ class _CalculatorState extends State<Calculator> {
         child: Text(number, style: const TextStyle(color: Color.fromARGB(255, 0, 0, 0))),
         onPressed: () => {
           setState(() {
-            if (acceptor.length == 0 /* || acceptor[0] == 0 */) {
+            print('start');
+            /* 계산기 사용 과정이 '숫자 1개 입력 > 연산 선택 > 숫자 1개 입력 > '=' 눌러서 결과보기'인데
+            숫자 1개 입력에 대한 처리 */
+            if (acceptor.length == 0) {
               print('1');
               equation = '';
               tempMemory = null;
               output = number;
-              // acceptor[0] = _number;
               acceptor.add(_number);
-            } else if (acceptor.length == 1 && acceptor[0] != 0 /* && acceptor[0] != 0 */) {
+            } else if (acceptor.length == 1 && acceptor[0] != 0) {
               print('2');
               output += number;
               acceptor[0] = double.parse(output);
@@ -222,16 +224,17 @@ class _CalculatorState extends State<Calculator> {
               print('4');
               output += number;
               acceptor[2] = double.parse(output);
-            }
-
-            /* else {
+            } else if (acceptor[0] == 0 && number != '0') {
+              // (a조건 && b조건) 판별시 a조건에서 false면 b조건은 판별하지 않고 끝남
               print('5');
-              // clear();
-              equation = '';
-              acceptor = [];
               output = number;
-              acceptor.add(_number);
-            } */
+              acceptor[0] = _number;
+            } else if (number != '0' && acceptor[2] == 0) {
+              print('6');
+              output = number;
+              acceptor[2] = _number;
+            }
+            print('end');
           })
         },
       ),
@@ -262,38 +265,4 @@ class _CalculatorState extends State<Calculator> {
     tempMemory = result;
     acceptor = [];
   }
-
-  /*  void clear() {
-    setState(() {
-      output = '0';
-      equation = '';
-      result = 0;
-      acceptor = [];
-    });
-  } */
-
-  /*  void add(double prevVal, double currVal) {
-    setState(() {});
-  }
-
-  void subtract(double prevVal, double currVal) {
-    print('subtract');
-    setState(() {
-      //result = prevVal - currVal;
-    });
-  }
-
-  void multiply(double prevVal, double currVal) {
-    print('multiply');
-    setState(() {
-      //result = prevVal * currVal;
-    });
-  }
-
-  void divide(double prevVal, double currVal) {
-    print('divide');
-    setState(() {
-      // result = prevVal / currVal;
-    });
-  } */
 }

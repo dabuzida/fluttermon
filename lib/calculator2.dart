@@ -1,16 +1,5 @@
 import 'package:flutter/material.dart';
 
-/* 
-
-수식을 쓸때, 첫번째 혹은 두번째 수 입력 시, 
-0을 입력 후, 다른 수(1~9)를 누르면 변경되며, acceptor[0] 혹은 acceptor[2]의 값도 0에서 다른 수로 바뀌어야한다
-  var acceptor = [null, null, null]; 선언후
-  acceptor.add 함수 안쓰고 acceptor[0] 이런식으로 접근해야
-
-
-첫번째숫자만 다쓰고 = 누를때도 첫번째 숫자 출력되도록
-
- */
 class Calculator2 extends StatefulWidget {
   const Calculator2({Key? key}) : super(key: key);
 
