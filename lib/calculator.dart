@@ -15,7 +15,8 @@ class _CalculatorState extends State<Calculator> {
   String output = '0';
   double result = 0;
   double? tempMemory;
-  var acceptor = [];
+  bool flag = true; // 정의되지 않음 출력시  숫자나, C 제외 버튼을 막고, 숫자와 C만 누르게 유도하기위함
+  var acceptor = <dynamic>[0];
   // var acceptor = [null, null, null];
 
   @override
@@ -44,7 +45,7 @@ class _CalculatorState extends State<Calculator> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         const Text('결과'),
-                        Text(output, style: const TextStyle(fontSize: 50)),
+                        Text(output, style: const TextStyle(fontSize: 30)),
                       ],
                     ),
                   ],
@@ -101,86 +102,111 @@ class _CalculatorState extends State<Calculator> {
         onPressed: () => {
           setState(() {
             // print(11);
-            switch (sign) {
-              case '+':
-                {
-                  if (acceptor.length == 2) {
-                    acceptor[1] = '+';
+            if (sign == 'C') {
+              flag = true;
+              // 0/0 같은 정의되지 않은 결과입니다 를 결과로 가질때
+              // C 혹은 숫자만 누를수있게 함
+            }
+            if (acceptor.length == 3) {
+              equal(acceptor);
+            }
+            if (flag) {
+              switch (sign) {
+                case '+':
+                  {
+                    if (acceptor.length == 2) {
+                      acceptor[1] = '+';
+                      print(acceptor);
+                      equation = output + '+';
+                      break;
+                    }
+                    if (tempMemory != null) {
+                      output = tempMemory.toString();
+                      equation = output + '+';
+                      acceptor.addAll([tempMemory, '+']);
+                      print(acceptor);
+                      break;
+                    }
                     equation = output + '+';
+                    // acceptor[1] = '+';
+                    acceptor.add('+');
+                    print(acceptor);
                     break;
                   }
-                  if (tempMemory != null) {
-                    output = tempMemory.toString();
-                    equation = output + '+';
-                    acceptor.addAll([tempMemory, '+']);
-                    break;
-                  }
-                  equation = output + '+';
-                  acceptor.add('+');
-                  break;
-                }
-              case '-':
-                {
-                  if (acceptor.length == 2) {
-                    acceptor[1] = '-';
+                case '-':
+                  {
+                    if (acceptor.length == 2) {
+                      acceptor[1] = '-';
+                      print(acceptor);
+                      equation = output + '-';
+                      break;
+                    }
+                    if (tempMemory != null) {
+                      output = tempMemory.toString();
+                      equation = output + '-';
+                      acceptor.addAll([tempMemory, '-']);
+                      print(acceptor);
+                      break;
+                    }
                     equation = output + '-';
+                    acceptor.add('-');
+                    print(acceptor);
                     break;
                   }
-                  if (tempMemory != null) {
-                    output = tempMemory.toString();
-                    equation = output + '-';
-                    acceptor.addAll([tempMemory, '-']);
-                    break;
-                  }
-                  equation = output + '-';
-                  acceptor.add('-');
-                  break;
-                }
-              case '×':
-                {
-                  if (acceptor.length == 2) {
-                    acceptor[1] = '×';
+                case '×':
+                  {
+                    if (acceptor.length == 2) {
+                      acceptor[1] = '×';
+                      print(acceptor);
+                      equation = output + '×';
+                      break;
+                    }
+                    if (tempMemory != null) {
+                      output = tempMemory.toString();
+                      equation = output + '×';
+                      acceptor.addAll([tempMemory, '×']);
+                      print(acceptor);
+                      break;
+                    }
                     equation = output + '×';
+                    acceptor.add('×');
+                    print(acceptor);
                     break;
                   }
-                  if (tempMemory != null) {
-                    output = tempMemory.toString();
-                    equation = output + '×';
-                    acceptor.addAll([tempMemory, '×']);
-                    break;
-                  }
-                  equation = output + '×';
-                  acceptor.add('×');
-                  break;
-                }
-              case '÷':
-                {
-                  if (acceptor.length == 2) {
-                    acceptor[1] = '÷';
+                case '÷':
+                  {
+                    if (acceptor.length == 2) {
+                      acceptor[1] = '÷';
+                      print(acceptor);
+                      equation = output + '÷';
+                      break;
+                    }
+                    if (tempMemory != null) {
+                      output = tempMemory.toString();
+                      equation = output + '÷';
+                      acceptor.addAll([tempMemory, '÷']);
+                      print(acceptor);
+                      break;
+                    }
                     equation = output + '÷';
+                    acceptor.add('÷');
+                    print(acceptor);
                     break;
                   }
-                  if (tempMemory != null) {
-                    output = tempMemory.toString();
-                    equation = output + '÷';
-                    acceptor.addAll([tempMemory, '÷']);
-                    break;
-                  }
-                  equation = output + '÷';
-                  acceptor.add('÷');
+                case 'C':
+                  output = '0';
+                  equation = '';
+                  result = 0;
+                  tempMemory = null;
+                  acceptor = [0];
+                  print(acceptor);
                   break;
-                }
-              case 'C':
-                output = '0';
-                equation = '';
-                result = 0;
-                tempMemory = null;
-                acceptor = [];
-                break;
-              case '=':
-                equal(acceptor);
-                break;
-              default:
+                case '=':
+                  equal(acceptor);
+                  print(acceptor);
+                  break;
+                default:
+              }
             }
           })
         },
@@ -206,35 +232,51 @@ class _CalculatorState extends State<Calculator> {
             print('start');
             /* 계산기 사용 과정이 '숫자 1개 입력 > 연산 선택 > 숫자 1개 입력 > '=' 눌러서 결과보기'인데
             숫자 1개 입력에 대한 처리 */
-            if (acceptor.length == 0) {
+            if (acceptor.length == 1 && acceptor[0] == 0 && number != '0') {
+              // 처음 숫자를 받을때, 항상 acceptor는 0이 들어가 있는 상태를 고려해야함
+              // acceptor[0]이 0이고, 0대신 1~9입력하고 싶을때
+              // (a조건 && b조건) 판별시 a조건에서 false면 b조건은 판별하지 않고 끝남
               print('1');
+              equation = '';
+              tempMemory = null;
+              output = number;
+              acceptor[0] = _number;
+            } else if (acceptor.length == 0 && tempMemory != null) {
+              // 연산 cycle을 한번 돈후, 이전결과값 재사용 하지않고 갱신후 새로운 첫번째 숫자를 받음
+              print('2');
               equation = '';
               tempMemory = null;
               output = number;
               acceptor.add(_number);
             } else if (acceptor.length == 1 && acceptor[0] != 0) {
-              print('2');
+              // 0이아닌 원소 1개가 들어가 있을때, 숫자를 눌러 그 뒤에 덧붙일때
+              print('3');
               output += number;
               acceptor[0] = double.parse(output);
             } else if (acceptor.length == 2) {
-              print('3');
+              // [숫자, 연산]상황에서 두번째 숫자를 입력
+              print('4');
               output = number;
               acceptor.add(_number);
             } else if (acceptor.length == 3 && acceptor[2] != 0) {
-              print('4');
+              // acceptor[2]이 0이 아닐때, 추가숫자를 덧붙일때
+              print('5');
               output += number;
               acceptor[2] = double.parse(output);
-            } else if (acceptor[0] == 0 && number != '0') {
-              // (a조건 && b조건) 판별시 a조건에서 false면 b조건은 판별하지 않고 끝남
-              print('5');
-              output = number;
-              acceptor[0] = _number;
-            } else if (number != '0' && acceptor[2] == 0) {
+            } else if (acceptor.length == 3 && acceptor[2] == 0 && number != '0') {
+              // acceptor[2]이 0이고, 0대신 1~9입력하고 싶을때
               print('6');
               output = number;
               acceptor[2] = _number;
+            } else if (acceptor.length == 0 && flag == false) {
+              // 정의되지 않음 출력시, 상황이 acceptor=[]에 flag=false임
+              print('7');
+              equation = '';
+              output = number;
+              acceptor.add(_number);
+              flag = true;
             }
-            print('end');
+            print('end>> $acceptor');
           })
         },
       ),
@@ -242,27 +284,83 @@ class _CalculatorState extends State<Calculator> {
   }
 
   void equal(var array) {
-    double num1 = array[0];
-    String sign = array[1];
-    double num2 = array[2];
-    switch (sign) {
-      case '+':
-        result = num1 + num2;
-        break;
-      case '-':
-        result = num1 - num2;
-        break;
-      case '×':
-        result = num1 * num2;
-        break;
-      case '÷':
-        result = num1 / num2;
-        break;
-      default:
+    if (array.length == 1) {
+      //[숫자]
+      result = array[0];
+      equation = result.toString() + '=';
+      output = result.toString();
+      print('결과는: $output');
+      tempMemory = result;
+      acceptor = [];
+    } else if (array.length == 2) {
+      // [숫자, 연산기호]
+      double num = array[0];
+      String sign = array[1];
+      switch (sign) {
+        case '+':
+          result = num + num;
+          break;
+        case '-':
+          result = num - num;
+          break;
+        case '×':
+          result = num * num;
+          break;
+        case '÷':
+          result = num / num;
+          break;
+        default:
+      }
+      /* 
+        result가 NaN이면, 정의되지 않은 수라고 출력 
+        NaN이 아니면, 그대로 출력
+        + 뒤처리(바로 연산은 못누름, =누르면 [0]상태, 숫자누르면 [누른숫자]) 
+      */
+      if (result.isNaN) {
+        output = '정의되지 않은 결과입니다.';
+        flag = false;
+        tempMemory = null;
+        acceptor = [];
+      } else {
+        equation += num.toString() + '=';
+        output = result.toString();
+        print('결과는: $output');
+        tempMemory = result;
+        acceptor = [];
+      }
+    } else if (array.length == 3) {
+      // [숫자, 연산기호, 숫자]
+      double num1 = array[0];
+      String sign = array[1];
+      double num2 = array[2];
+      switch (sign) {
+        case '+':
+          result = num1 + num2;
+          break;
+        case '-':
+          result = num1 - num2;
+          break;
+        case '×':
+          result = num1 * num2;
+          break;
+        case '÷':
+          result = num1 / num2;
+          break;
+        default:
+      }
+
+      if (result.isNaN) {
+        output = '정의되지 않은 결과입니다.';
+        flag = false;
+        tempMemory = null;
+        acceptor = [];
+      } else {
+        equation += num2.toString() + '=';
+        output = result.toString();
+        print('결과는: $output');
+        tempMemory = result;
+        acceptor = [];
+      }
     }
-    equation += num2.toString();
-    output = result.toString();
-    tempMemory = result;
-    acceptor = [];
   }
 }
