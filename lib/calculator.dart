@@ -321,6 +321,11 @@ class _CalculatorState extends State<Calculator> {
         flag = false;
         tempMemory = null;
         acceptor = [];
+      } else if (result.isInfinite) {
+        output = '0으로 나눌 수 없습니다.';
+        flag = false;
+        tempMemory = null;
+        acceptor = [];
       } else {
         equation += num.toString() + '=';
         output = result.toString();
@@ -351,6 +356,11 @@ class _CalculatorState extends State<Calculator> {
 
       if (result.isNaN) {
         output = '정의되지 않은 결과입니다.';
+        flag = false;
+        tempMemory = null;
+        acceptor = [];
+      } else if (result.isInfinite) {
+        output = '0으로 나눌 수 없습니다.';
         flag = false;
         tempMemory = null;
         acceptor = [];
