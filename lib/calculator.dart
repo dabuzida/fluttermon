@@ -45,7 +45,7 @@ class _CalculatorState extends State<Calculator> {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         const Text('결과'),
-                        Text(output, style: const TextStyle(fontSize: 30)),
+                        Text(output, style: const TextStyle(fontSize: 20)),
                       ],
                     ),
                   ],
@@ -193,6 +193,32 @@ class _CalculatorState extends State<Calculator> {
                     print(acceptor);
                     break;
                   }
+                case '.':
+                  {
+                    // tempMemory가 음수든 양수든 있는 상태에서 . 누르면 0. 으로 가도록
+                    if (acceptor.length == 1 && acceptor[0].toString().) {
+                      acceptor[0] = acceptor[0].toString() + '.';
+                    }
+
+                    //
+                    if (acceptor.length == 2) {
+                      acceptor[1] = '÷';
+                      print(acceptor);
+                      equation = output + '÷';
+                      break;
+                    }
+                    if (tempMemory != null) {
+                      output = tempMemory.toString();
+                      equation = '';
+                      acceptor.addAll([tempMemory, '÷']);
+                      print(acceptor);
+                      break;
+                    }
+                    equation = output + '÷';
+                    acceptor.add('÷');
+                    print(acceptor);
+                    break;
+                  }
                 case 'C':
                   output = '0';
                   equation = '';
@@ -276,7 +302,8 @@ class _CalculatorState extends State<Calculator> {
               acceptor.add(_number);
               flag = true;
             }
-            print('end>> $acceptor');
+
+            print('end: $acceptor');
           })
         },
       ),
@@ -286,7 +313,10 @@ class _CalculatorState extends State<Calculator> {
   void equal(var array) {
     if (array.length == 1) {
       //[숫자]
-      result = array[0];
+      var num = array[0];
+      if (num is String) num = double.parse(num);
+      result = num;
+      // result = array[0];
       equation = result.toString() + '=';
       output = result.toString();
       print('결과는: $output');
@@ -294,8 +324,10 @@ class _CalculatorState extends State<Calculator> {
       acceptor = [];
     } else if (array.length == 2) {
       // [숫자, 연산기호]
-      double num = array[0];
       String sign = array[1];
+      var num = array[0];
+      if (num is String) num = double.parse(num);
+      // double num = array[0];
       switch (sign) {
         case '+':
           result = num + num;
@@ -335,9 +367,13 @@ class _CalculatorState extends State<Calculator> {
       }
     } else if (array.length == 3) {
       // [숫자, 연산기호, 숫자]
-      double num1 = array[0];
       String sign = array[1];
-      double num2 = array[2];
+      var num1 = array[0];
+      var num2 = array[2];
+      if (num1 is String) num1 = double.parse(num1);
+      if (num2 is String) num2 = double.parse(num2);
+      // double num1 = array[0];
+      // double num2 = array[2];
       switch (sign) {
         case '+':
           result = num1 + num2;
