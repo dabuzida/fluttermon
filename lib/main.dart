@@ -34,7 +34,7 @@ class MyApp extends StatelessWidget {
     // print('MyApp');
     return const MaterialApp(
       title: 'computer',
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Colors.green,
         body: Calculator(),
@@ -157,7 +157,7 @@ class _MyApp2State extends State<MyApp2> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'computer',
-      // debugShowCheckedModeBanner: false,
+      debugShowCheckedModeBanner: false,
       home: Scaffold(
         body: SingleChildScrollView(
           child: testctn(),

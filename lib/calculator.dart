@@ -14,14 +14,14 @@ class _CalculatorState extends State<Calculator> {
   String equation = '';
   String output = '0';
   double result = 0;
-  double? tempMemory;
+  String? tempMemory;
   bool flag = true; // 정의되지 않음 출력시  숫자나, C 제외 버튼을 막고, 숫자와 C만 누르게 유도하기위함
-  var acceptor = <dynamic>[0];
+  var acceptor = <String>['0'];
   // var acceptor = [null, null, null];
-
   @override
   Widget build(BuildContext context) {
     // print('_CalculatorState()');
+    // print('acceptor 초기값: $acceptor');
     return Center(
       child: SizedBox(
         width: 600,
@@ -54,31 +54,31 @@ class _CalculatorState extends State<Calculator> {
               Expanded(
                 child: Row(
                   children: <Widget>[
-                    createOperationBtn('.', 'decimal fraction'),
-                    createOperationBtn('+', 'add'),
-                    createOperationBtn('-', 'decimal fraction'),
-                    createOperationBtn('×', 'decimal fraction'),
-                    createOperationBtn('÷', 'decimal fraction'),
-                    createOperationBtn('C', 'clear'),
-                    createOperationBtn('=', 'decimal fraction'),
+                    createOperationBtn('.'),
+                    createOperationBtn('+'),
+                    createOperationBtn('-'),
+                    createOperationBtn('×'),
+                    createOperationBtn('÷'),
+                    createOperationBtn('C'),
+                    createOperationBtn('='),
                   ],
                 ),
               ),
               Expanded(
                   child: Row(children: <Widget>[
-                createNumberBtn(1, '1', 'pass_1'),
-                createNumberBtn(2, '2', 'pass_2'),
-                createNumberBtn(3, '3', 'pass_3'),
-                createNumberBtn(4, '4', 'pass_4'),
-                createNumberBtn(5, '5', 'pass_5'),
+                createNumberBtn('1'),
+                createNumberBtn('2'),
+                createNumberBtn('3'),
+                createNumberBtn('4'),
+                createNumberBtn('5'),
               ])),
               Expanded(
                   child: Row(children: <Widget>[
-                createNumberBtn(6, '6', 'pass_6'),
-                createNumberBtn(7, '7', 'pass_7'),
-                createNumberBtn(8, '8', 'pass_8'),
-                createNumberBtn(9, '9', 'pass_9'),
-                createNumberBtn(0, '0', 'pass_0'),
+                createNumberBtn('6'),
+                createNumberBtn('7'),
+                createNumberBtn('8'),
+                createNumberBtn('9'),
+                createNumberBtn('0'),
               ])),
             ],
           ),
@@ -87,7 +87,7 @@ class _CalculatorState extends State<Calculator> {
     );
   }
 
-  Widget createOperationBtn(String sign, String operation) {
+  Widget createOperationBtn(String sign) {
     return Expanded(
         child: SizedBox(
       height: double.infinity,
@@ -107,7 +107,8 @@ class _CalculatorState extends State<Calculator> {
               // 0/0 같은 정의되지 않은 결과입니다 를 결과로 가질때
               // C 혹은 숫자만 누를수있게 함
             }
-            if (acceptor.length == 3) {
+            if (acceptor.length == 3 && ['+', '-', '×', '÷'].any((e) => e == sign)) {
+              // []가 3개 차있고 선택된 버튼이 연산기호4개중 1나일때 계산해버려야
               equal(acceptor);
             }
             if (flag) {
@@ -115,20 +116,30 @@ class _CalculatorState extends State<Calculator> {
                 case '+':
                   {
                     if (acceptor.length == 2) {
+                      // accepotr 2개차있는경우 연산기호누르면 누른 연산기호로 변경
                       acceptor[1] = '+';
                       print(acceptor);
                       equation = output + '+';
                       break;
                     }
                     if (tempMemory != null) {
+                      // 연산 결과값을 이용하는 경우
                       output = tempMemory.toString();
                       equation = output + '+';
-                      acceptor.addAll([tempMemory, '+']);
+                      acceptor.addAll([tempMemory!, '+']);
                       print(acceptor);
                       break;
                     }
+                    /* if (acceptor.length == 1 && acceptor[0].substring(acceptor[0].length - 1) == '.') {
+                      // 0. 상황에서 연산 누를때 0 연산기호(+) 로 변환되도록
+                      String integer = acceptor[0].substring(0, acceptor[0].length - 1);
+                      acceptor.clear();
+                      acceptor.addAll([integer, '+']);
+                      print(acceptor);
+                      break;
+                    } */
+                    if (output.substring(output.length - 1) == '.') output = output.substring(0, output.length - 1);
                     equation = output + '+';
-                    // acceptor[1] = '+';
                     acceptor.add('+');
                     print(acceptor);
                     break;
@@ -144,7 +155,14 @@ class _CalculatorState extends State<Calculator> {
                     if (tempMemory != null) {
                       output = tempMemory.toString();
                       equation = output + '-';
-                      acceptor.addAll([tempMemory, '-']);
+                      acceptor.addAll([tempMemory!, '-']);
+                      print(acceptor);
+                      break;
+                    }
+                    if (acceptor.length == 1 && acceptor[0].substring(acceptor[0].length - 1) == '.') {
+                      String integer = acceptor[0].substring(0, acceptor[0].length - 1);
+                      acceptor.clear();
+                      acceptor.addAll([integer, '-']);
                       print(acceptor);
                       break;
                     }
@@ -164,7 +182,14 @@ class _CalculatorState extends State<Calculator> {
                     if (tempMemory != null) {
                       output = tempMemory.toString();
                       equation = output + '×';
-                      acceptor.addAll([tempMemory, '×']);
+                      acceptor.addAll([tempMemory!, '×']);
+                      print(acceptor);
+                      break;
+                    }
+                    if (acceptor.length == 1 && acceptor[0].substring(acceptor[0].length - 1) == '.') {
+                      String integer = acceptor[0].substring(0, acceptor[0].length - 1);
+                      acceptor.clear();
+                      acceptor.addAll([integer, '×']);
                       print(acceptor);
                       break;
                     }
@@ -184,7 +209,14 @@ class _CalculatorState extends State<Calculator> {
                     if (tempMemory != null) {
                       output = tempMemory.toString();
                       equation = output + '÷';
-                      acceptor.addAll([tempMemory, '÷']);
+                      acceptor.addAll([tempMemory!, '÷']);
+                      print(acceptor);
+                      break;
+                    }
+                    if (acceptor.length == 1 && acceptor[0].substring(acceptor[0].length - 1) == '.') {
+                      String integer = acceptor[0].substring(0, acceptor[0].length - 1);
+                      acceptor.clear();
+                      acceptor.addAll([integer, '÷']);
                       print(acceptor);
                       break;
                     }
@@ -195,30 +227,46 @@ class _CalculatorState extends State<Calculator> {
                   }
                 case '.':
                   {
-                    /* if (acceptor.isEmpty) {
+                    if (acceptor.isEmpty) {
+                      // [] 상태에서 . 클릭 시
                       print('i');
                       acceptor.add('0.');
-                    } else if (acceptor.length == 1 && ) { //  끝이 .이 없을때만
+                      output = acceptor[0];
+                      print(acceptor);
+                      break;
+                    } else if (acceptor.length == 1 && acceptor[0].substring(acceptor[0].length - 1) != '.') {
+                      //  [숫자]에서 끝이 . 붙지 않은 경우
                       print('ii');
-                      acceptor[0] = acceptor[0].toString() + '.';
+                      acceptor[0] += '.';
+                      output = acceptor[0];
+                      print(acceptor);
+                      break;
+                    } else if (acceptor.length == 2) {
+                      // [숫자, 기호] 상태에서 . 클릭 시
+                      print('iii');
+                      acceptor.add('0.');
+                      output = acceptor[2];
+                      print(acceptor);
+                      break;
+                    } else if (acceptor.length == 3 && acceptor[2].substring(acceptor[2].length - 1) != '.') {
+                      // [숫자, 기호, 숫자] 상태에서 마지막 숫자끝에 . 붙지 않은 경우
+                      print('iv');
+                      acceptor[2] += '.';
+                      output = acceptor[2];
+                      print(acceptor);
+                      break;
+                    }
+                    /* 
+                    if (tempMemory != null) {
+                      output = tempMemory.toString();
+                      equation = '';
+                      acceptor.addAll([tempMemory!, '÷']);
+                      print(acceptor);
+                      break;
                     } */
-
-                    // if (acceptor.length == 2) {
-                    //   acceptor[1] = '÷';
-                    //   print(acceptor);
-                    //   equation = output + '÷';
-                    //   break;
-                    // }
-                    // if (tempMemory != null) {
-                    //   output = tempMemory.toString();
-                    //   equation = '';
-                    //   acceptor.addAll([tempMemory, '÷']);
-                    //   print(acceptor);
-                    //   break;
-                    // }
                     // equation = output + '÷';
                     // acceptor.add('÷');
-                    // print(acceptor);
+                    print(acceptor);
                     break;
                   }
                 case 'C':
@@ -226,12 +274,12 @@ class _CalculatorState extends State<Calculator> {
                   equation = '';
                   result = 0;
                   tempMemory = null;
-                  acceptor = [0];
+                  acceptor = ['0'];
                   print(acceptor);
                   break;
                 case '=':
-                  equal(acceptor);
                   print(acceptor);
+                  equal(acceptor);
                   break;
                 default:
               }
@@ -242,7 +290,7 @@ class _CalculatorState extends State<Calculator> {
     ));
   }
 
-  Widget createNumberBtn(double _number, String number, String operation) {
+  Widget createNumberBtn(String number) {
     return Expanded(
         child: SizedBox(
       height: double.infinity,
@@ -260,7 +308,7 @@ class _CalculatorState extends State<Calculator> {
             print('start');
             /* 계산기 사용 과정이 '숫자 1개 입력 > 연산 선택 > 숫자 1개 입력 > '=' 눌러서 결과보기'인데
             숫자 1개 입력에 대한 처리 */
-            if (acceptor.length == 1 && acceptor[0] == 0 && number != '0') {
+            if (acceptor.length == 1 && acceptor[0] == '0' && number != '0') {
               // 처음 숫자를 받을때, 항상 acceptor는 0이 들어가 있는 상태를 고려해야함
               // acceptor[0]이 0이고, 0대신 1~9입력하고 싶을때
               // (a조건 && b조건) 판별시 a조건에서 false면 b조건은 판별하지 않고 끝남
@@ -268,43 +316,42 @@ class _CalculatorState extends State<Calculator> {
               equation = '';
               tempMemory = null;
               output = number;
-              acceptor[0] = _number;
+              acceptor[0] = number;
             } else if (acceptor.length == 0 && tempMemory != null) {
               // 연산 cycle을 한번 돈후, 이전결과값 재사용 하지않고 갱신후 새로운 첫번째 숫자를 받음
               print('2');
               equation = '';
               tempMemory = null;
               output = number;
-              acceptor.add(_number);
-            } else if (acceptor.length == 1 && acceptor[0] != 0) {
+              acceptor.add(number);
+            } else if (acceptor.length == 1 && acceptor[0] != '0') {
               // 0이아닌 원소 1개가 들어가 있을때, 숫자를 눌러 그 뒤에 덧붙일때
               print('3');
               output += number;
-              acceptor[0] = double.parse(output);
+              acceptor[0] = output;
             } else if (acceptor.length == 2) {
               // [숫자, 연산]상황에서 두번째 숫자를 입력
               print('4');
               output = number;
-              acceptor.add(_number);
-            } else if (acceptor.length == 3 && acceptor[2] != 0) {
+              acceptor.add(number);
+            } else if (acceptor.length == 3 && acceptor[2] != '0') {
               // acceptor[2]이 0이 아닐때, 추가숫자를 덧붙일때
               print('5');
               output += number;
-              acceptor[2] = double.parse(output);
-            } else if (acceptor.length == 3 && acceptor[2] == 0 && number != '0') {
+              acceptor[2] = output;
+            } else if (acceptor.length == 3 && acceptor[2] == '0' && number != '0') {
               // acceptor[2]이 0이고, 0대신 1~9입력하고 싶을때
               print('6');
               output = number;
-              acceptor[2] = _number;
+              acceptor[2] = number;
             } else if (acceptor.length == 0 && flag == false) {
               // 정의되지 않음 출력시, 상황이 acceptor=[]에 flag=false임
               print('7');
               equation = '';
               output = number;
-              acceptor.add(_number);
+              acceptor.add(number);
               flag = true;
             }
-
             print('end: $acceptor');
           })
         },
@@ -315,21 +362,18 @@ class _CalculatorState extends State<Calculator> {
   void equal(var array) {
     if (array.length == 1) {
       //[숫자]
-      var num = array[0];
-      if (num is String) num = double.parse(num);
+      double num = double.parse(array[0]);
       result = num;
-      // result = array[0];
+
       equation = result.toString() + '=';
       output = result.toString();
       print('결과는: $output');
-      tempMemory = result;
+      tempMemory = result.toString();
       acceptor = [];
     } else if (array.length == 2) {
       // [숫자, 연산기호]
       String sign = array[1];
-      var num = array[0];
-      if (num is String) num = double.parse(num);
-      // double num = array[0];
+      double num = double.parse(array[0]);
       switch (sign) {
         case '+':
           result = num + num;
@@ -364,18 +408,14 @@ class _CalculatorState extends State<Calculator> {
         equation += num.toString() + '=';
         output = result.toString();
         print('결과는: $output');
-        tempMemory = result;
+        tempMemory = result.toString();
         acceptor = [];
       }
     } else if (array.length == 3) {
       // [숫자, 연산기호, 숫자]
       String sign = array[1];
-      var num1 = array[0];
-      var num2 = array[2];
-      if (num1 is String) num1 = double.parse(num1);
-      if (num2 is String) num2 = double.parse(num2);
-      // double num1 = array[0];
-      // double num2 = array[2];
+      double num1 = double.parse(array[0]);
+      double num2 = double.parse(array[2]);
       switch (sign) {
         case '+':
           result = num1 + num2;
@@ -406,7 +446,7 @@ class _CalculatorState extends State<Calculator> {
         equation += num2.toString() + '=';
         output = result.toString();
         print('결과는: $output');
-        tempMemory = result;
+        tempMemory = result.toString();
         acceptor = [];
       }
     }
