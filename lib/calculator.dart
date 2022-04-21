@@ -195,28 +195,30 @@ class _CalculatorState extends State<Calculator> {
                   }
                 case '.':
                   {
-                    // tempMemory가 음수든 양수든 있는 상태에서 . 누르면 0. 으로 가도록
-                    if (acceptor.length == 1 && acceptor[0].toString().) {
+                    /* if (acceptor.isEmpty) {
+                      print('i');
+                      acceptor.add('0.');
+                    } else if (acceptor.length == 1 && ) { //  끝이 .이 없을때만
+                      print('ii');
                       acceptor[0] = acceptor[0].toString() + '.';
-                    }
+                    } */
 
-                    //
-                    if (acceptor.length == 2) {
-                      acceptor[1] = '÷';
-                      print(acceptor);
-                      equation = output + '÷';
-                      break;
-                    }
-                    if (tempMemory != null) {
-                      output = tempMemory.toString();
-                      equation = '';
-                      acceptor.addAll([tempMemory, '÷']);
-                      print(acceptor);
-                      break;
-                    }
-                    equation = output + '÷';
-                    acceptor.add('÷');
-                    print(acceptor);
+                    // if (acceptor.length == 2) {
+                    //   acceptor[1] = '÷';
+                    //   print(acceptor);
+                    //   equation = output + '÷';
+                    //   break;
+                    // }
+                    // if (tempMemory != null) {
+                    //   output = tempMemory.toString();
+                    //   equation = '';
+                    //   acceptor.addAll([tempMemory, '÷']);
+                    //   print(acceptor);
+                    //   break;
+                    // }
+                    // equation = output + '÷';
+                    // acceptor.add('÷');
+                    // print(acceptor);
                     break;
                   }
                 case 'C':
