@@ -36,7 +36,7 @@ class MyApp extends StatelessWidget {
       title: 'computer',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Colors.green,
+        backgroundColor: Color.fromARGB(255, 151, 231, 154),
         body: Calculator(),
         /* Center(
           child: Red(),

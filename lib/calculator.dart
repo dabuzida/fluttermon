@@ -16,89 +16,150 @@ class _CalculatorState extends State<Calculator> {
   double result = 0;
   String? tempMemory;
   bool flag = true; // 정의되지 않음 출력시  숫자나, C 제외 버튼을 막고, 숫자와 C만 누르게 유도하기위함
-  var acceptor = <String>['0'];
-  // var acceptor = [null, null, null];
+  List<String> acceptor = <String>['0'];
+  List<Map<String, String>> history = [
+    {
+      '8 × 1': '8',
+      '8 × 2': '16',
+      '8 × 3': '24',
+    },
+  ];
+// +-×÷
+  Map vi = {
+    '8 × 1': '8',
+    '8 × 2': '16',
+    '8 × 3': '24',
+  };
+
   @override
   Widget build(BuildContext context) {
     // print('_CalculatorState()');
     // print('acceptor 초기값: $acceptor');
     return Center(
-      child: SizedBox(
-        width: 600,
-        height: 600,
-        child: Container(
-          color: Color.fromARGB(255, 204, 201, 201),
-          child: Column(
-            // crossAxisAlignment: CrossAxisAlignment.end,
-            children: <Widget>[
-              Expanded(
-                child: Column(
-                  children: [
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        const Text('수식'),
-                        Text(equation, style: const TextStyle(fontSize: 50)),
-                      ],
+      child: Row(
+        mainAxisSize: MainAxisSize.min,
+        children: <Widget>[
+          Container(
+            width: 600,
+            height: 600,
+            color: const Color.fromARGB(255, 204, 201, 201),
+            child: Column(
+              // crossAxisAlignment: CrossAxisAlignment.end,
+              children: <Widget>[
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(2, 2, 2, 1),
+                    child: Container(
+                      color: const Color.fromARGB(228, 255, 255, 255),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const Text('수식'),
+                          Text(equation, style: const TextStyle(fontSize: 50)),
+                        ],
+                      ),
                     ),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: <Widget>[
-                        const Text('결과'),
-                        Text(output, style: const TextStyle(fontSize: 20)),
-                      ],
+                  ),
+                ),
+                Expanded(
+                  child: Padding(
+                    padding: const EdgeInsets.fromLTRB(2, 1, 2, 1),
+                    child: Container(
+                      color: const Color.fromARGB(228, 255, 255, 255),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: <Widget>[
+                          const Text('결과'),
+                          Text(output, style: const TextStyle(fontSize: 20)),
+                        ],
+                      ),
                     ),
-                  ],
+                  ),
                 ),
-              ),
-              Expanded(
-                child: Row(
-                  children: <Widget>[
-                    createOperationBtn('.'),
-                    createOperationBtn('+'),
-                    createOperationBtn('-'),
-                    createOperationBtn('×'),
-                    createOperationBtn('÷'),
-                    createOperationBtn('C'),
-                    createOperationBtn('='),
-                  ],
+                Expanded(
+                  flex: 2,
+                  child: Row(
+                    children: <Widget>[
+                      createOperationBtn('.'),
+                      createOperationBtn('+'),
+                      createOperationBtn('-'),
+                      createOperationBtn('×'),
+                      createOperationBtn('÷'),
+                      createOperationBtn('C'),
+                      createOperationBtn('='),
+                    ],
+                  ),
                 ),
-              ),
-              Expanded(
-                  child: Row(children: <Widget>[
-                createNumberBtn('1'),
-                createNumberBtn('2'),
-                createNumberBtn('3'),
-                createNumberBtn('4'),
-                createNumberBtn('5'),
-              ])),
-              Expanded(
-                  child: Row(children: <Widget>[
-                createNumberBtn('6'),
-                createNumberBtn('7'),
-                createNumberBtn('8'),
-                createNumberBtn('9'),
-                createNumberBtn('0'),
-              ])),
-            ],
+                Expanded(
+                    flex: 2,
+                    child: Row(children: <Widget>[
+                      createNumberBtn('1'),
+                      createNumberBtn('2'),
+                      createNumberBtn('3'),
+                      createNumberBtn('4'),
+                      createNumberBtn('5'),
+                    ])),
+                Expanded(
+                    flex: 2,
+                    child: Row(children: <Widget>[
+                      createNumberBtn('6'),
+                      createNumberBtn('7'),
+                      createNumberBtn('8'),
+                      createNumberBtn('9'),
+                      createNumberBtn('0'),
+                    ])),
+              ],
+            ),
           ),
-        ),
+          Container(
+            width: 300,
+            height: 600,
+            color: Colors.grey[200],
+            child: Column(
+              children: <Widget>[
+                Container(
+                  width: 300,
+                  height: 30,
+                  color: Colors.amber,
+                  child: const Center(
+                      child: Text(
+                    '기록',
+                    style: TextStyle(fontWeight: FontWeight.w600),
+                  )),
+                ),
+                SizedBox(
+                  width: 300,
+                  height: 570,
+                  child: ListView.builder(
+                    padding: const EdgeInsets.all(8),
+                    itemCount: history.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      return Text('${history[0]}       ${history[0]}');
+                    },
+                  ),
+                ),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
 
   Widget createOperationBtn(String sign) {
     return Expanded(
-        child: SizedBox(
+        child: Container(
+      padding: const EdgeInsets.all(1),
       height: double.infinity,
       child: TextButton(
         style: TextButton.styleFrom(
-            backgroundColor: const Color.fromARGB(230, 226, 226, 226),
+            backgroundColor: Color.fromARGB(220, 255, 253, 253),
             textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.zero),
             )),
         child: Text(sign, style: const TextStyle(fontSize: 30, fontWeight: FontWeight.w500, color: Color.fromARGB(255, 0, 0, 0))),
+        // onHover: ,
         onPressed: () => {
           setState(() {
             // print(11);
@@ -292,7 +353,8 @@ class _CalculatorState extends State<Calculator> {
 
   Widget createNumberBtn(String number) {
     return Expanded(
-        child: SizedBox(
+        child: Container(
+      padding: const EdgeInsets.all(1),
       height: double.infinity,
       child: TextButton(
         style: TextButton.styleFrom(
@@ -362,6 +424,7 @@ class _CalculatorState extends State<Calculator> {
   void equal(var array) {
     if (array.length == 1) {
       //[숫자]
+      // history.add();
       double num = double.parse(array[0]);
       result = num;
 
