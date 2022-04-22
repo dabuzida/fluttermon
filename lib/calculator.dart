@@ -17,23 +17,11 @@ class _CalculatorState extends State<Calculator> {
   String? tempMemory;
   bool flag = true; // 정의되지 않음 출력시  숫자나, C 제외 버튼을 막고, 숫자와 C만 누르게 유도하기위함
   List<String> acceptor = <String>['0'];
-  List<Map<String, String>> history = [
-    {
-      '8 × 1': '8',
-      '8 × 2': '16',
-      '8 × 3': '24',
-    },
-  ];
-// +-×÷
-  Map vi = {
-    '8 × 1': '8',
-    '8 × 2': '16',
-    '8 × 3': '24',
-  };
+  List<Map<String, String>> history = [];
 
   @override
   Widget build(BuildContext context) {
-    // print('_CalculatorState()');
+    print('_CalculatorState()');
     // print('acceptor 초기값: $acceptor');
     return Center(
       child: Row(
@@ -120,7 +108,7 @@ class _CalculatorState extends State<Calculator> {
                 Container(
                   width: 300,
                   height: 30,
-                  color: Colors.amber,
+                  // color: Colors.amber,
                   child: const Center(
                       child: Text(
                     '기록',
@@ -131,10 +119,21 @@ class _CalculatorState extends State<Calculator> {
                   width: 300,
                   height: 570,
                   child: ListView.builder(
-                    padding: const EdgeInsets.all(8),
+                    padding: const EdgeInsets.symmetric(horizontal: 15),
                     itemCount: history.length,
                     itemBuilder: (BuildContext context, int index) {
-                      return Text('${history[0]}       ${history[0]}');
+                      return Container(
+                        height: 100,
+                        // decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.blue))),
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                          crossAxisAlignment: CrossAxisAlignment.end,
+                          children: <Widget>[
+                            Text(history[history.length - index - 1].keys.single),
+                            Text(history[history.length - index - 1].values.single),
+                          ],
+                        ),
+                      );
                     },
                   ),
                 ),
@@ -424,12 +423,13 @@ class _CalculatorState extends State<Calculator> {
   void equal(var array) {
     if (array.length == 1) {
       //[숫자]
-      // history.add();
       double num = double.parse(array[0]);
       result = num;
 
       equation = result.toString() + '=';
       output = result.toString();
+      history.add({equation: output});
+
       print('결과는: $output');
       tempMemory = result.toString();
       acceptor = [];
@@ -470,6 +470,7 @@ class _CalculatorState extends State<Calculator> {
       } else {
         equation += num.toString() + '=';
         output = result.toString();
+        history.add({equation: output});
         print('결과는: $output');
         tempMemory = result.toString();
         acceptor = [];
@@ -508,6 +509,7 @@ class _CalculatorState extends State<Calculator> {
       } else {
         equation += num2.toString() + '=';
         output = result.toString();
+        history.add({equation: output});
         print('결과는: $output');
         tempMemory = result.toString();
         acceptor = [];
