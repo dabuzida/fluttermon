@@ -4,7 +4,6 @@ import 'dart:math';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:fluttermon/calculator.dart';
-// import 'package:fluttermon/calculator2.dart';
 import 'package:fluttermon/test3.dart';
 
 import 'test1.dart';
