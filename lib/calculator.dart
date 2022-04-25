@@ -1,3 +1,5 @@
+import 'dart:html';
+
 import 'package:flutter/material.dart';
 
 class Calculator extends StatefulWidget {
@@ -23,6 +25,9 @@ class _CalculatorState extends State<Calculator> {
   Widget build(BuildContext context) {
     print('_CalculatorState()');
     // print('acceptor 초기값: $acceptor');
+    // print(history.length);
+    print(history);
+
     return Center(
       child: Row(
         mainAxisSize: MainAxisSize.min,
@@ -74,6 +79,7 @@ class _CalculatorState extends State<Calculator> {
                       createOperationBtn('×'),
                       createOperationBtn('÷'),
                       createOperationBtn('C'),
+                      createOperationBtn('⇚'), // ⇦⇚
                       createOperationBtn('='),
                     ],
                   ),
@@ -104,6 +110,7 @@ class _CalculatorState extends State<Calculator> {
             height: 600,
             color: Colors.grey[200],
             child: Column(
+              crossAxisAlignment: CrossAxisAlignment.end,
               children: <Widget>[
                 Container(
                   width: 300,
@@ -117,13 +124,50 @@ class _CalculatorState extends State<Calculator> {
                 ),
                 SizedBox(
                   width: 300,
-                  height: 570,
-                  child: ListView.builder(
-                    padding: const EdgeInsets.symmetric(horizontal: 15),
-                    itemCount: history.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      return Container(
+                  height: 520,
+                  child: history.isNotEmpty
+                      ? ListView.builder(
+                          // padding: const EdgeInsets.symmetric(horizontal: 15),
+                          itemCount: history.length,
+                          itemBuilder: (BuildContext context, int index) {
+                            print('=>>>>>>>>>>> $history');
+                            return TextButton(
+                              onPressed: () => setState(
+                                () {
+                                  history.removeAt(history.length - index - 1);
+                                },
+                              ),
+                              child: SizedBox(
+                                width: double.infinity,
+                                height: 100,
+                                child: Column(
+                                  mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                                  crossAxisAlignment: CrossAxisAlignment.end,
+                                  children: <Widget>[
+                                    Text(
+                                      history[history.length - index - 1].keys.single,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 20,
+                                        fontWeight: FontWeight.w400,
+                                      ),
+                                    ),
+                                    Text(
+                                      history[history.length - index - 1].values.single,
+                                      style: const TextStyle(
+                                        color: Colors.black,
+                                        fontSize: 30,
+                                        fontWeight: FontWeight.w700,
+                                      ),
+                                    ),
+                                  ],
+                                ),
+                              ),
+                            );
+
+                            /* Container(
                         height: 100,
+                        color: Colors.cyan,
                         // decoration: BoxDecoration(border: Border(top: BorderSide(color: Colors.blue))),
                         child: Column(
                           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
@@ -133,10 +177,31 @@ class _CalculatorState extends State<Calculator> {
                             Text(history[history.length - index - 1].values.single),
                           ],
                         ),
-                      );
-                    },
-                  ),
+                      ); */
+                          },
+                        )
+                      : const Text('아직 기록이 없음'),
                 ),
+                SizedBox(
+                    width: 50,
+                    height: 50,
+                    child: history.isNotEmpty
+                        ? TextButton(
+                            child: const Text(
+                              '🗑',
+                              style: TextStyle(
+                                fontSize: 40,
+                                fontWeight: FontWeight.w900,
+                                color: Colors.indigo,
+                              ),
+                            ),
+                            onPressed: () => {
+                              setState(() {
+                                history.clear();
+                              })
+                            },
+                          )
+                        : null)
               ],
             ),
           ),
@@ -152,7 +217,7 @@ class _CalculatorState extends State<Calculator> {
       height: double.infinity,
       child: TextButton(
         style: TextButton.styleFrom(
-            backgroundColor: Color.fromARGB(220, 255, 253, 253),
+            backgroundColor: const Color.fromARGB(220, 255, 253, 253),
             textStyle: const TextStyle(fontSize: 20, fontWeight: FontWeight.w700),
             shape: const RoundedRectangleBorder(
               borderRadius: BorderRadius.all(Radius.zero),
@@ -173,6 +238,35 @@ class _CalculatorState extends State<Calculator> {
             }
             if (flag) {
               switch (sign) {
+                case '⇚':
+                  {
+                    if (acceptor.length == 1 && acceptor[0].length > 1) {
+                      print('i');
+                      acceptor[0] = acceptor[0].substring(0, acceptor[0].length - 1);
+                      output = acceptor[0];
+                      print(acceptor);
+                      break;
+                    } else if (acceptor.length == 1 && acceptor[0].length == 1) {
+                      print('ii');
+                      acceptor[0] = '0';
+                      output = acceptor[0];
+                      print(acceptor);
+                      break;
+                    } else if (acceptor.length == 3 && acceptor[2].length > 1) {
+                      print('iii');
+                      acceptor[2] = acceptor[2].substring(0, acceptor[2].length - 1);
+                      output = acceptor[2];
+                      print(acceptor);
+                      break;
+                    } else if (acceptor.length == 3 && acceptor[2].length == 1) {
+                      print('iv');
+                      acceptor[2] = '0';
+                      output = acceptor[2];
+                      print(acceptor);
+                      break;
+                    }
+                    break;
+                  }
                 case '+':
                   {
                     if (acceptor.length == 2) {
