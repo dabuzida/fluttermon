@@ -3,10 +3,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
-import 'package:fluttermon/calculator.dart';
-import 'package:fluttermon/test3.dart';
+
+// 만든 프로젝트 모듈로 분리하여 관리
+import 'calculator.dart';
+import 'test.dart';
+import 'test_ListViewBuilder.dart';
 
 import 'test1.dart';
+import 'package:fluttermon/test3.dart';
 
 void showLayoutGuidelines() {
   debugPaintSizeEnabled = true;
@@ -32,12 +36,14 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     // print('MyApp');
     return const MaterialApp(
-      title: 'computer',
+      title: '_100m',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
         backgroundColor: Color.fromARGB(255, 151, 231, 154),
-        body: Calculator(),
-        /* Center(
+        body: Test(),
+        // body: ListViewBuilder(), // 계산기 관련 테스트
+        // body: Calculator(),
+        /* body: Center(
           child: Red(),
         ), */
       ),
