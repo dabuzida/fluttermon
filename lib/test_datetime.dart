@@ -2,14 +2,14 @@ import 'dart:collection';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
 
-class Test extends StatefulWidget {
-  const Test({Key? key}) : super(key: key);
+class TestDateTime extends StatefulWidget {
+  const TestDateTime({Key? key}) : super(key: key);
 
   @override
-  State<Test> createState() => _TestState();
+  State<TestDateTime> createState() => _TestDateTimeState();
 }
 
-class _TestState extends State<Test> {
+class _TestDateTimeState extends State<TestDateTime> {
   final DateTime now = DateTime.now();
   final DateFormat format = DateFormat('yyyy-MM-dd');
   final DateFormat format2 = DateFormat('yyyy년 MM월 dd일 hh시 mm분 ss초');
@@ -18,7 +18,7 @@ class _TestState extends State<Test> {
   // final String formatted = format.format(now);
   // print(formatted);
 
-  _TestState() {
+  _TestDateTimeState() {
     // final String formatted2 = format2.format(now);
     // print(formatted);
     // print(formatted2);

@@ -6,11 +6,13 @@ import 'package:flutter/rendering.dart';
 
 // 만든 프로젝트 모듈로 분리하여 관리
 import 'calculator.dart';
-import 'test.dart';
+import 'test_datetime.dart';
 import 'test_ListViewBuilder.dart';
 
 import 'test1.dart';
 import 'package:fluttermon/test3.dart';
+
+import 'test_setstate.dart';
 
 void showLayoutGuidelines() {
   debugPaintSizeEnabled = true;
@@ -35,14 +37,19 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // print('MyApp');
-    return const MaterialApp(
+    return MaterialApp(
       title: '_100m',
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        backgroundColor: Color.fromARGB(255, 151, 231, 154),
-        body: Test(),
+        backgroundColor: Colors.green[200],
+        appBar: AppBar(
+          // title: Text('test setState'),
+          centerTitle: true,
+        ),
+        // body: const TestSetState(),
+        // body: TestDateTime(),
         // body: ListViewBuilder(), // 계산기 관련 테스트
-        // body: Calculator(),
+        body: Calculator(),
         /* body: Center(
           child: Red(),
         ), */

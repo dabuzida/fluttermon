@@ -514,9 +514,19 @@ class _CalculatorState extends State<Calculator> {
     ));
   }
 
+  String clipDecimalPoint(String numAsStr) {
+    int dotPositon;
+    String subForCheck;
+    dotPositon = numAsStr.indexOf('.');
+    subForCheck = numAsStr.substring(dotPositon);
+    if (subForCheck.length > 4) numAsStr = numAsStr.substring(0, dotPositon + 4);
+    return numAsStr;
+  }
+
   void equal(var array) {
     if (array.length == 1) {
       //[숫자]
+      if (array[0].contains('.')) array[0] = clipDecimalPoint(array[0]); // 소수 셋째자리까지 출력
       double num = double.parse(array[0]);
       result = num;
 
@@ -573,6 +583,7 @@ class _CalculatorState extends State<Calculator> {
       // [숫자, 연산기호, 숫자]
       String sign = array[1];
       double num1 = double.parse(array[0]);
+      if (array[2].contains('.')) array[2] = clipDecimalPoint(array[2]); // 소수 셋째자리까지 출력
       double num2 = double.parse(array[2]);
       switch (sign) {
         case '+':
@@ -602,7 +613,13 @@ class _CalculatorState extends State<Calculator> {
         acceptor = [];
       } else {
         equation += num2.toString() + '=';
-        output = result.toString();
+
+        if (result.toString().contains('.')) {
+          output = clipDecimalPoint(result.toString());
+        } else {
+          output = result.toString();
+        }
+
         history.add({equation: output});
         print('결과는: $output');
         tempMemory = result.toString();
