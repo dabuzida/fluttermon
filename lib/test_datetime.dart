@@ -32,6 +32,35 @@ class _TestDateTimeState extends State<TestDateTime> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
+          Text('datasddddddddddddddddddddddddddddddddddddddd'),
+          /* Container(
+            color: Colors.grey,
+            width: 300,
+            height: 200,
+            child: ListTile(
+              leading: Image.network('https://picsum.photos/id/254/200'),
+              title: Text(
+                'sadfsdafsdfsdf',
+              ),
+              subtitle: Text('sdfsdfsdfsd'),
+              trailing: TextButton(
+                onPressed: () {},
+                child: Icon(
+                  Icons.delete_forever_outlined,
+                  size: 20,
+                  color: Colors.grey[400],
+                ),
+              ),
+            ),
+          ), */
+          TextButton(
+              onPressed: () {},
+              child: SizedBox(
+                  width: 100,
+                  height: 100,
+                  child: Icon(
+                    Icons.remove_circle_outline,
+                  ))),
           Text(p1.name),
           Text(p1.image.toString()),
           Text(p1.timeCreated),

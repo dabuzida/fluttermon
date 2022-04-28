@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 
 // 만든 프로젝트 모듈로 분리하여 관리
 import 'calculator.dart';
+import 'red.dart';
 import 'test_datetime.dart';
 import 'test_ListViewBuilder.dart';
 
@@ -22,10 +23,7 @@ void showBaselines() {
   debugPaintBaselinesEnabled = true;
 }
 
-String _1vs1 = 'https://cglink.com/files/attach/images/1589/713/001/UV.Grid.jpg';
-String _2vs3 = 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnVpbGRpbmd8ZW58MHx8MHx8&w=1000&q=80';
 void main() {
-  // print('main()');
   // showLayoutGuidelines();
   // showBaselines();
   return runApp(const MyApp());
@@ -36,126 +34,88 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // print('MyApp');
-    return MaterialApp(
+    return const MaterialApp(
       title: '_100m',
       debugShowCheckedModeBanner: false,
-      home: Scaffold(
-        backgroundColor: Colors.green[200],
-        appBar: AppBar(
-          // title: Text('test setState'),
-          centerTitle: true,
-        ),
-        // body: const TestSetState(),
-        // body: TestDateTime(),
-        // body: ListViewBuilder(), // 계산기 관련 테스트
-        body: Calculator(),
-        /* body: Center(
-          child: Red(),
-        ), */
+      home: Gate(),
+    );
+  }
+}
+
+class Gate extends StatefulWidget {
+  const Gate({Key? key}) : super(key: key);
+
+  @override
+  State<Gate> createState() => _GateState();
+}
+
+class _GateState extends State<Gate> {
+  int _selectedIndex = 0;
+  static const List<Widget> _widgetOptions = <Widget>[
+    Calculator(),
+    TestSetState(),
+    TestDateTime(),
+    ListViewBuilder(),
+    Red(),
+  ];
+  void _onItemTapped(int index) {
+    setState(() {
+      _selectedIndex = index;
+    });
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: Colors.green[200],
+      appBar: AppBar(
+        title: const Text('flutter sample'),
+        elevation: 0,
+        foregroundColor: Colors.yellow[300],
+        backgroundColor: Colors.purple,
+        centerTitle: true,
+      ),
+      body: Center(
+        child: _widgetOptions.elementAt(_selectedIndex),
+      ),
+      bottomNavigationBar: BottomNavigationBar(
+        currentIndex: _selectedIndex,
+        onTap: _onItemTapped,
+        selectedItemColor: Colors.cyanAccent[100],
+        items: const <BottomNavigationBarItem>[
+          BottomNavigationBarItem(
+            icon: Icon(Icons.calculate),
+            label: 'i',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.eco_outlined),
+            label: 'ii',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.school),
+            label: 'iii',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.church),
+            label: 'iv',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.restaurant),
+            label: 'v',
+            backgroundColor: Colors.black,
+          ),
+        ],
       ),
     );
   }
 }
 
-class Red extends StatefulWidget {
-  const Red({Key? key}) : super(key: key);
-
-  @override
-  State<Red> createState() {
-    print('createState()');
-    return _RedState();
-  }
-}
-
-class _RedState extends State<Red> {
-  int xx = 0xFFFF0000;
-  @override
-  Widget build(BuildContext context) {
-    print('red');
-    return GestureDetector(
-      onTap: () => {
-        if (xx == 0xFFFF0000)
-          {
-            setState(() {
-              xx = 0xFF0000FF;
-            })
-          }
-        else
-          {
-            {
-              setState(() {
-                xx = 0xFFFF0000;
-              })
-            }
-          }
-      },
-      child: Container(
-        width: 400,
-        height: 400,
-        color: Color(xx),
-        child: Column(children: [
-          Green(),
-          Orange(
-              //
-              //key: UniqueKey(),
-              ),
-        ]),
-      ),
-    );
-  }
-}
-
-class Green extends StatelessWidget {
-  const Green({Key? key}) : super(key: key);
-
-  @override
-  Widget build(BuildContext context) {
-    print('green');
-    return Container(
-      width: 100,
-      height: 100,
-      color: Colors.green,
-    );
-  }
-}
-
-class Orange extends StatefulWidget {
-  const Orange({Key? key}) : super(key: key);
-
-  @override
-  State<Orange> createState() => _OrangeState();
-}
-
-class _OrangeState extends State<Orange> {
-  final _random = new Random();
-  int next(int min, int max) => min + _random.nextInt(max - min);
-
-  int? a;
-
-  @override
-  void initState() {
-    print('initState');
-    int n = next(1, 3);
-    if (n == 1)
-      a = 0xFF00FFFF;
-    else if (n == 2)
-      a = 0xFFFFFF00;
-    else
-      a = 0xFFFF00FF;
-    super.initState();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    print('orange');
-    return Container(
-      width: 100,
-      height: 100,
-      color: Color(a!),
-    );
-  }
-}
+String _1vs1 = 'https://cglink.com/files/attach/images/1589/713/001/UV.Grid.jpg';
+String _2vs3 = 'https://images.unsplash.com/photo-1534237710431-e2fc698436d0?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8MXx8YnVpbGRpbmd8ZW58MHx8MHx8&w=1000&q=80';
 
 class MyApp2 extends StatefulWidget {
   const MyApp2({Key? key}) : super(key: key);

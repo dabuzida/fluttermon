@@ -54,9 +54,9 @@ class _TestSetStateState extends State<TestSetState> {
     return TextButton(
       onPressed: () {
         print(i);
-        setState(() {});
-        i--;
-        print(i);
+        setState(() {
+          i--;
+        });
       },
       child: const SizedBox(
         height: 200,
