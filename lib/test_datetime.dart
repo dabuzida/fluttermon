@@ -32,30 +32,25 @@ class _TestDateTimeState extends State<TestDateTime> {
       child: Column(
         mainAxisSize: MainAxisSize.min,
         children: [
-          Text('datasddddddddddddddddddddddddddddddddddddddd'),
-          /* Container(
-            color: Colors.grey,
-            width: 300,
-            height: 200,
-            child: ListTile(
-              leading: Image.network('https://picsum.photos/id/254/200'),
-              title: Text(
-                'sadfsdafsdfsdf',
-              ),
-              subtitle: Text('sdfsdfsdfsd'),
-              trailing: TextButton(
-                onPressed: () {},
-                child: Icon(
-                  Icons.delete_forever_outlined,
-                  size: 20,
-                  color: Colors.grey[400],
-                ),
-              ),
+          ElevatedButton(
+            child: Text('Open route'),
+            onPressed: () {
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => SecondRoute()),
+              );
+            },
+          ),
+          Align(
+            alignment: Alignment.bottomRight,
+            child: FloatingActionButton(
+              onPressed: () {},
+              child: Icon(Icons.send),
             ),
-          ), */
+          ),
           TextButton(
               onPressed: () {},
-              child: SizedBox(
+              child: const SizedBox(
                   width: 100,
                   height: 100,
                   child: Icon(
@@ -69,6 +64,46 @@ class _TestDateTimeState extends State<TestDateTime> {
         ],
       ),
     );
+  }
+}
+
+class SecondRoute extends StatelessWidget {
+  const SecondRoute({Key? key}) : super(key: key);
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      color: Colors.amber,
+      width: 300,
+      height: 300,
+      child: Center(
+        child: ElevatedButton(
+          onPressed: () {
+            Navigator.pop(context);
+          },
+          child: Text('Go back!'),
+        ),
+      ),
+    );
+
+    /* Scaffold(
+      // appBar: AppBar(
+      //   title: Text("Second Route"),
+      // ),
+      body: Container(
+        color: Colors.amber,
+        width: 300,
+        height: 300,
+        child: Center(
+          child: ElevatedButton(
+            onPressed: () {
+              Navigator.pop(context);
+            },
+            child: Text('Go back!'),
+          ),
+        ),
+      ),
+    ); */
   }
 }
 

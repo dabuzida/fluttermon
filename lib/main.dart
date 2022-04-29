@@ -50,7 +50,7 @@ class Gate extends StatefulWidget {
 }
 
 class _GateState extends State<Gate> {
-  int _selectedIndex = 0;
+  int _selectedIndex = 2;
   static const List<Widget> _widgetOptions = <Widget>[
     Calculator(),
     TestSetState(),
@@ -69,7 +69,15 @@ class _GateState extends State<Gate> {
     return Scaffold(
       backgroundColor: Colors.green[200],
       appBar: AppBar(
-        title: const Text('flutter sample'),
+        title: _selectedIndex == 0
+            ? Text(_widgetOptions[0].toString())
+            : _selectedIndex == 1
+                ? Text(_widgetOptions[1].toString())
+                : _selectedIndex == 2
+                    ? Text(_widgetOptions[2].toString())
+                    : _selectedIndex == 3
+                        ? Text(_widgetOptions[3].toString())
+                        : Text(_widgetOptions[4].toString()),
         elevation: 0,
         foregroundColor: Colors.yellow[300],
         backgroundColor: Colors.purple,
