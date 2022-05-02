@@ -6,6 +6,7 @@ import 'package:flutter/rendering.dart';
 
 // 만든 프로젝트 모듈로 분리하여 관리
 import 'calculator.dart';
+import 'factory.dart';
 import 'red.dart';
 import 'test_datetime.dart';
 import 'test_ListViewBuilder.dart';
@@ -50,14 +51,8 @@ class Gate extends StatefulWidget {
 }
 
 class _GateState extends State<Gate> {
-  int _selectedIndex = 2;
-  static const List<Widget> _widgetOptions = <Widget>[
-    Calculator(),
-    TestSetState(),
-    TestDateTime(),
-    ListViewBuilder(),
-    Red(),
-  ];
+  int _selectedIndex = 3;
+  static const List<Widget> _widgetOptions = <Widget>[Calculator(), TestSetState(), TestDateTime(), ListViewBuilder(), Red(), Factory()];
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -77,7 +72,9 @@ class _GateState extends State<Gate> {
                     ? Text(_widgetOptions[2].toString())
                     : _selectedIndex == 3
                         ? Text(_widgetOptions[3].toString())
-                        : Text(_widgetOptions[4].toString()),
+                        : _selectedIndex == 3
+                            ? Text(_widgetOptions[4].toString())
+                            : Text(_widgetOptions[5].toString()),
         elevation: 0,
         foregroundColor: Colors.yellow[300],
         backgroundColor: Colors.purple,
@@ -114,6 +111,11 @@ class _GateState extends State<Gate> {
           BottomNavigationBarItem(
             icon: Icon(Icons.restaurant),
             label: 'v',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.dark_mode_sharp),
+            label: 'vi',
             backgroundColor: Colors.black,
           ),
         ],
