@@ -3,11 +3,11 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 
-class ListViewBuilder extends StatefulWidget {
-  const ListViewBuilder({Key? key}) : super(key: key);
+class Laboratory extends StatefulWidget {
+  const Laboratory({Key? key}) : super(key: key);
 
   @override
-  State<ListViewBuilder> createState() => _ListViewBuilderState();
+  State<Laboratory> createState() => _LaboratoryState();
 }
 
 //  { "userId": 1,
@@ -38,6 +38,7 @@ class Json {
 }
 
 Future<List<Json>> fetchPost() async {
+  await Future.delayed(const Duration(seconds: 1));
   final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
   // final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
 
@@ -54,18 +55,19 @@ Future<List<Json>> fetchPost() async {
 }
 
 ////////////////////////////////////////////////////////////////////
-class _ListViewBuilderState extends State<ListViewBuilder> {
-  final Future<String> _calculation = Future<String>.delayed(
-    const Duration(seconds: 2),
-    () => 'Data Loaded',
-  );
+class _LaboratoryState extends State<Laboratory> {
+  // final Future<String> _calculation = Future<String>.delayed(
+  //   const Duration(seconds: 2),
+  //   () => 'Data Loaded',
+  // );
 
   Future<List<Json>>? json;
+  // List<Json>? json; // 왜 이걸로 선언해야하지 않나?
 
   @override
   void initState() {
     super.initState();
-    json = fetchPost();
+    json = fetchPost(); // fetchPost 리턴은 List<Json>타입
   }
   // Future<http.Response> fetchPost() {
   //   return http.get('https://jsonplaceholder.typicode.com/posts/1');

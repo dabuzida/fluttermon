@@ -3,13 +3,14 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttermon/lavoratory.dart';
 
 // 만든 프로젝트 모듈로 분리하여 관리
 import 'calculator.dart';
 import 'factory.dart';
 import 'red.dart';
 import 'test_datetime.dart';
-import 'test_ListViewBuilder.dart';
+import 'laboratory.dart';
 
 import 'test1.dart';
 import 'package:fluttermon/test3.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: '_100m',
+      title: '########################',
       debugShowCheckedModeBanner: false,
       home: Gate(),
     );
@@ -52,7 +53,15 @@ class Gate extends StatefulWidget {
 
 class _GateState extends State<Gate> {
   int _selectedIndex = 3;
-  static const List<Widget> _widgetOptions = <Widget>[Calculator(), TestSetState(), TestDateTime(), ListViewBuilder(), Red(), Factory()];
+  static const List<Widget> _widgetOptions = <Widget>[
+    Calculator(),
+    TestSetState(),
+    TestDateTime(),
+    Laboratory(),
+    Red(),
+    Factory(),
+    Lavoratory(),
+  ];
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
@@ -74,7 +83,9 @@ class _GateState extends State<Gate> {
                         ? Text(_widgetOptions[3].toString())
                         : _selectedIndex == 3
                             ? Text(_widgetOptions[4].toString())
-                            : Text(_widgetOptions[5].toString()),
+                            : _selectedIndex == 3
+                                ? Text(_widgetOptions[5].toString())
+                                : Text(_widgetOptions[6].toString()),
         elevation: 0,
         foregroundColor: Colors.yellow[300],
         backgroundColor: Colors.purple,
@@ -104,7 +115,7 @@ class _GateState extends State<Gate> {
             backgroundColor: Colors.black,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.church),
+            icon: Icon(Icons.science),
             label: 'iv',
             backgroundColor: Colors.black,
           ),
@@ -116,6 +127,11 @@ class _GateState extends State<Gate> {
           BottomNavigationBarItem(
             icon: Icon(Icons.dark_mode_sharp),
             label: 'vi',
+            backgroundColor: Colors.black,
+          ),
+          BottomNavigationBarItem(
+            icon: Icon(Icons.anchor),
+            label: 'vii',
             backgroundColor: Colors.black,
           ),
         ],
