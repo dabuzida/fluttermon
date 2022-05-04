@@ -52,7 +52,7 @@ class Gate extends StatefulWidget {
 }
 
 class _GateState extends State<Gate> {
-  int _selectedIndex = 3;
+  int _selectedIndex = 6;
   static const List<Widget> _widgetOptions = <Widget>[
     Calculator(),
     TestSetState(),
@@ -97,42 +97,44 @@ class _GateState extends State<Gate> {
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
-        selectedItemColor: Colors.cyanAccent[100],
-        items: const <BottomNavigationBarItem>[
+        showSelectedLabels: true,
+        showUnselectedLabels: true,
+        selectedItemColor: Colors.yellowAccent,
+        items: <BottomNavigationBarItem>[
           BottomNavigationBarItem(
-            icon: Icon(Icons.calculate),
-            label: 'i',
-            backgroundColor: Colors.black,
+            icon: const Icon(Icons.calculate),
+            label: _widgetOptions[0].toString(),
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.eco_outlined),
-            label: 'ii',
-            backgroundColor: Colors.black,
+            icon: const Icon(Icons.eco_outlined),
+            label: _widgetOptions[1].toString(),
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.school),
-            label: 'iii',
-            backgroundColor: Colors.black,
+            icon: const Icon(Icons.school),
+            label: _widgetOptions[2].toString(),
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.science),
-            label: 'iv',
-            backgroundColor: Colors.black,
+            icon: const Icon(Icons.science),
+            label: _widgetOptions[3].toString(),
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.restaurant),
-            label: 'v',
-            backgroundColor: Colors.black,
+            icon: const Icon(Icons.restaurant),
+            label: _widgetOptions[4].toString(),
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.dark_mode_sharp),
-            label: 'vi',
-            backgroundColor: Colors.black,
+            icon: const Icon(Icons.dark_mode_sharp),
+            label: _widgetOptions[5].toString(),
+            backgroundColor: Colors.blue,
           ),
           BottomNavigationBarItem(
-            icon: Icon(Icons.anchor),
-            label: 'vii',
-            backgroundColor: Colors.black,
+            icon: const Icon(Icons.anchor),
+            label: _widgetOptions[6].toString(),
+            backgroundColor: Colors.blue,
           ),
         ],
       ),

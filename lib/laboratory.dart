@@ -19,7 +19,7 @@ class Json {
   late int id;
   late String title;
   late String body;
-  Json({required this.userId, required this.id, required this.title, required this.body});
+  // Json({required this.userId, required this.id, required this.title, required this.body});
 
   Json.fromJson(Map<String, dynamic> json) {
     userId = json['userId'];
@@ -103,7 +103,8 @@ class _LaboratoryState extends State<Laboratory> {
           }
 
           // 기본적으로 로딩 Spinner를 보여줍니다.
-          return const CircularProgressIndicator();
+          // return const CircularProgressIndicator();
+          return Image.network('https://previews.123rf.com/images/sundatoon/sundatoon1607/sundatoon160700027/61127080-sourire-singe-gratter-la-t%C3%AAte.jpg');
         },
       ),
     );
