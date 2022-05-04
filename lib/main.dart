@@ -3,6 +3,7 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
+import 'package:fluttermon/lavoratery.dart';
 import 'package:fluttermon/lavoratory.dart';
 
 // 만든 프로젝트 모듈로 분리하여 관리
@@ -52,7 +53,7 @@ class Gate extends StatefulWidget {
 }
 
 class _GateState extends State<Gate> {
-  int _selectedIndex = 6;
+  int _selectedIndex = 7;
   static const List<Widget> _widgetOptions = <Widget>[
     Calculator(),
     TestSetState(),
@@ -61,6 +62,7 @@ class _GateState extends State<Gate> {
     Red(),
     Factory(),
     Lavoratory(),
+    Lavoratery(),
   ];
   void _onItemTapped(int index) {
     setState(() {
@@ -81,11 +83,13 @@ class _GateState extends State<Gate> {
                     ? Text(_widgetOptions[2].toString())
                     : _selectedIndex == 3
                         ? Text(_widgetOptions[3].toString())
-                        : _selectedIndex == 3
+                        : _selectedIndex == 4
                             ? Text(_widgetOptions[4].toString())
-                            : _selectedIndex == 3
+                            : _selectedIndex == 5
                                 ? Text(_widgetOptions[5].toString())
-                                : Text(_widgetOptions[6].toString()),
+                                : _selectedIndex == 6
+                                    ? Text(_widgetOptions[6].toString())
+                                    : Text(_widgetOptions[7].toString()),
         elevation: 0,
         foregroundColor: Colors.yellow[300],
         backgroundColor: Colors.purple,
@@ -134,6 +138,11 @@ class _GateState extends State<Gate> {
           BottomNavigationBarItem(
             icon: const Icon(Icons.anchor),
             label: _widgetOptions[6].toString(),
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.hotel_class),
+            label: _widgetOptions[7].toString(),
             backgroundColor: Colors.blue,
           ),
         ],

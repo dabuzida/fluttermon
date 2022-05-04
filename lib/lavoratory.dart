@@ -48,7 +48,7 @@ class _LavoratoryState extends State<Lavoratory> {
 
   requestData() async {
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
-    await Future.delayed(const Duration(seconds: 2));
+    await Future.delayed(const Duration(seconds: 3));
     if (response.statusCode == 200) {
       json = Json.fromJson(jsonDecode(response.body));
       userId = json.userId;
@@ -89,7 +89,9 @@ class _LavoratoryState extends State<Lavoratory> {
 
     if (flag == false) {
       // return CircularProgressIndicator();
-      return Image.network('https://mir-s3-cdn-cf.behance.net/project_modules/fs/b6e0b072897469.5bf6e79950d23.gif');
+      return Image.network('https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!c1024wm0');
+      // return Image.network('https://mir-s3-cdn-cf.behance.net/project_modules/fs/b6e0b072897469.5bf6e79950d23.gif');
+      // https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!c1024wm0
     } else {
       return Center(
         child: ListTile(
