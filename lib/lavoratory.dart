@@ -45,12 +45,18 @@ class _LavoratoryState extends State<Lavoratory> {
   late String title;
   late String body;
   bool flag = false;
-
+  late String _responseBody;
   requestData() async {
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
-    await Future.delayed(const Duration(seconds: 3));
+    // await Future.delayed(const Duration(seconds: 3));
     if (response.statusCode == 200) {
-      json = Json.fromJson(jsonDecode(response.body));
+      _responseBody = response.body;
+      print(_responseBody);
+      print(_responseBody.runtimeType);
+      print(jsonDecode(_responseBody));
+      print(jsonDecode(_responseBody).runtimeType);
+
+      json = Json.fromJson(jsonDecode(_responseBody));
       userId = json.userId;
       id = json.id;
       title = json.title;
