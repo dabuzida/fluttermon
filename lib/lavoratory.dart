@@ -11,26 +11,23 @@ class Lavoratory extends StatefulWidget {
 }
 
 class Json {
-  late int userId;
-  late int id;
+  late String userId;
+  late String id;
   late String title;
   late String body;
   // Json({required this.userId, required this.id, required this.title, required this.body});
 
   Json.fromJson(Map<String, dynamic> json) {
-    print('----- Json.fromJson -----');
-    userId = json['userId'];
-    id = json['id'];
+    userId = json['userId'].toString();
+    id = json['id'].toString();
     title = json['title'];
     body = json['body'];
   }
 }
 
 Future<Json> fetchPost() async {
-  print('----- Future<Json> fetchPost() async -----');
   // await Future.delayed(const Duration(seconds: 2));
   final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
-  // await Future.delayed(const Duration(seconds: 2));
   if (response.statusCode == 200) {
     return Json.fromJson(jsonDecode(response.body));
   } else {
@@ -39,51 +36,38 @@ Future<Json> fetchPost() async {
 }
 
 class _LavoratoryState extends State<Lavoratory> {
-  late Json json;
-  late int userId;
-  late int id;
-  late String title;
-  late String body;
+  late Json jsonTransformed;
   bool flag = false;
-  late String _responseBody;
-  requestData() async {
-    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
-    // await Future.delayed(const Duration(seconds: 3));
-    if (response.statusCode == 200) {
-      _responseBody = response.body;
-      print(_responseBody);
-      print(_responseBody.runtimeType);
-      print(jsonDecode(_responseBody));
-      print(jsonDecode(_responseBody).runtimeType);
 
-      json = Json.fromJson(jsonDecode(_responseBody));
-      userId = json.userId;
-      id = json.id;
-      title = json.title;
-      body = json.body;
+  requestData() async {
+    String jsonRawData;
+    Map<String, dynamic> jsonMap;
+    final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts/1'));
+    await Future.delayed(const Duration(seconds: 1));
+    if (response.statusCode == 200) {
+      jsonRawData = response.body;
+      jsonMap = jsonDecode(jsonRawData);
+      jsonTransformed = Json.fromJson(jsonMap);
+
+      // print('${jsonRawData.runtimeType} >> $jsonRawData');
+      // print('${jsonMap.runtimeType} >> $jsonMap');
+      // print('${jsonTransformed.runtimeType} >> $jsonTransformed');
       setState(() {
         flag = true;
       });
     } else {
       throw Exception('Failed to load post');
     }
-
-    Future.delayed(Duration(seconds: 3), () {
-      flag = true;
-      setState(() {});
-    });
   }
 
   @override
   void initState() {
     super.initState();
-    print('----- initState() -----');
     requestData();
   }
 
   @override
   Widget build(BuildContext context) {
-    print('----- Widget build(BuildContext context) -----');
     // Future.delayed(const Duration(milliseconds: 500), () {
     //   // Here you can write your code
     //   // print('monkey');
@@ -101,10 +85,10 @@ class _LavoratoryState extends State<Lavoratory> {
     } else {
       return Center(
         child: ListTile(
-          leading: Text(userId.toString()),
-          title: Text(title),
-          subtitle: Text(body),
-          trailing: Text(id.toString()),
+          leading: Text(jsonTransformed.userId),
+          title: Text(jsonTransformed.title),
+          subtitle: Text(jsonTransformed.body),
+          trailing: Text(jsonTransformed.id),
         ),
       );
     }

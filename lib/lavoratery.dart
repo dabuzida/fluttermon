@@ -26,41 +26,26 @@ class Json {
 
 class _LavorateryState extends State<Lavoratery> {
   late List<Json> jsonTransformed;
-  // late Json json;
-
   bool flag = false;
-// print(jsonListString);
-//   List jsonObjectList = jsonDecode(jsonListString);
-//   print(jsonObjectList);
-//   List<User> jsonInstanceList = jsonObjectList.map((e) => User.ivi(e)).toList();
-//   print(jsonInstanceList);
 
   requestData() async {
+    String jsonRawData;
+    List jsonList;
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
     await Future.delayed(const Duration(seconds: 1));
     if (response.statusCode == 200) {
-      String jsonRawData = response.body;
-      List jsonList = jsonDecode(jsonRawData);
-      print(jsonList[0]);
-      print(jsonList.runtimeType);
-
+      jsonRawData = response.body;
+      jsonList = jsonDecode(jsonRawData);
       jsonTransformed = jsonList.map((e) => Json.fromJson(e)).toList();
-      print(jsonTransformed);
-      print(jsonTransformed.runtimeType);
-      // jsonList = list.map((e) => Json.fromJson(e)).toList();
-      // print(jsonList);
-
+      // print('${jsonRawData.runtimeType} >> $jsonRawData');
+      // print('${jsonList.runtimeType} >> $jsonList');
+      // print('${jsonTransformed.runtimeType} >> $jsonTransformed');
       setState(() {
         flag = true;
       });
     } else {
       throw Exception('Failed to load post');
     }
-
-    // Future.delayed(Duration(seconds: 3), () {
-    //   flag = true;
-    //   setState(() {});
-    // });
   }
 
   @override
@@ -75,6 +60,7 @@ class _LavorateryState extends State<Lavoratery> {
       return Image.network('https://c.tenor.com/7NX24XoJX0MAAAAC/loading-fast.gif');
     } else {
       return ListView.builder(
+        controller: ScrollController(),
         itemCount: jsonTransformed.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(

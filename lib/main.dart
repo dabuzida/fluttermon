@@ -9,6 +9,7 @@ import 'package:fluttermon/lavoratory.dart';
 // 만든 프로젝트 모듈로 분리하여 관리
 import 'calculator.dart';
 import 'factory.dart';
+import 'pprovider.dart';
 import 'red.dart';
 import 'test_datetime.dart';
 import 'laboratory.dart';
@@ -53,7 +54,7 @@ class Gate extends StatefulWidget {
 }
 
 class _GateState extends State<Gate> {
-  int _selectedIndex = 7;
+  int _selectedIndex = 8;
   static const List<Widget> _widgetOptions = <Widget>[
     Calculator(),
     TestSetState(),
@@ -63,41 +64,56 @@ class _GateState extends State<Gate> {
     Factory(),
     Lavoratory(),
     Lavoratery(),
+    Pprovider(),
   ];
+  Widget _indexedStack() {
+    return IndexedStack(
+      index: _selectedIndex,
+      children: _widgetOptions,
+    );
+  }
+
   void _onItemTapped(int index) {
     setState(() {
       _selectedIndex = index;
     });
   }
 
+  PreferredSizeWidget _appbar() {
+    return AppBar(
+      title: _selectedIndex == 0
+          ? Text(_widgetOptions[0].toString())
+          : _selectedIndex == 1
+              ? Text(_widgetOptions[1].toString())
+              : _selectedIndex == 2
+                  ? Text(_widgetOptions[2].toString())
+                  : _selectedIndex == 3
+                      ? Text(_widgetOptions[3].toString())
+                      : _selectedIndex == 4
+                          ? Text(_widgetOptions[4].toString())
+                          : _selectedIndex == 5
+                              ? Text(_widgetOptions[5].toString())
+                              : _selectedIndex == 6
+                                  ? Text(_widgetOptions[6].toString())
+                                  : _selectedIndex == 7
+                                      ? Text(_widgetOptions[7].toString())
+                                      : Text(_widgetOptions[8].toString()),
+      elevation: 0,
+      foregroundColor: Colors.yellow[300],
+      backgroundColor: Colors.purple,
+      centerTitle: true,
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.green[200],
-      appBar: AppBar(
-        title: _selectedIndex == 0
-            ? Text(_widgetOptions[0].toString())
-            : _selectedIndex == 1
-                ? Text(_widgetOptions[1].toString())
-                : _selectedIndex == 2
-                    ? Text(_widgetOptions[2].toString())
-                    : _selectedIndex == 3
-                        ? Text(_widgetOptions[3].toString())
-                        : _selectedIndex == 4
-                            ? Text(_widgetOptions[4].toString())
-                            : _selectedIndex == 5
-                                ? Text(_widgetOptions[5].toString())
-                                : _selectedIndex == 6
-                                    ? Text(_widgetOptions[6].toString())
-                                    : Text(_widgetOptions[7].toString()),
-        elevation: 0,
-        foregroundColor: Colors.yellow[300],
-        backgroundColor: Colors.purple,
-        centerTitle: true,
-      ),
-      body: Center(
+      backgroundColor: Colors.orangeAccent[100],
+      appBar: _appbar(),
+      body: /* Center(
         child: _widgetOptions.elementAt(_selectedIndex),
-      ),
+      ), */
+          _indexedStack(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
@@ -143,6 +159,11 @@ class _GateState extends State<Gate> {
           BottomNavigationBarItem(
             icon: const Icon(Icons.hotel_class),
             label: _widgetOptions[7].toString(),
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.sailing),
+            label: _widgetOptions[8].toString(),
             backgroundColor: Colors.blue,
           ),
         ],
