@@ -25,7 +25,8 @@ class Json {
 }
 
 class _LavorateryState extends State<Lavoratery> {
-  late List jsonList;
+  late List<Json> jsonList;
+  late List<Json> jsonList2;
   // late Json json;
   late int userId;
   late int id;
@@ -40,13 +41,16 @@ class _LavorateryState extends State<Lavoratery> {
 
   requestData() async {
     final response = await http.get(Uri.parse('https://jsonplaceholder.typicode.com/posts'));
-    await Future.delayed(const Duration(seconds: 1));
+    // await Future.delayed(const Duration(seconds: 1));
     if (response.statusCode == 200) {
-      var list = jsonDecode(response.body);
-      print(list[0]);
+      List list = jsonDecode(response.body);
+      var list2 = jsonDecode(response.body);
+      // print(list[0]);
       print(list.runtimeType);
+      print(list2.runtimeType);
 
       jsonList = list.map((e) => Json.fromJson(e)).toList();
+      jsonList2 = list2.map((e) => Json.fromJson(e)).toList();
       print(jsonList);
       print(jsonList.runtimeType);
       // jsonList = list.map((e) => Json.fromJson(e)).toList();
