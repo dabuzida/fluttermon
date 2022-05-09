@@ -27,6 +27,7 @@ class Json {
 class _LavorateryState extends State<Lavoratery> {
   late List<Json> jsonTransformed;
   bool flag = false;
+  ScrollController _scrollController = ScrollController();
 
   requestData() async {
     String jsonRawData;
@@ -57,10 +58,10 @@ class _LavorateryState extends State<Lavoratery> {
   @override
   Widget build(BuildContext context) {
     if (flag == false) {
-      return Image.network('https://c.tenor.com/7NX24XoJX0MAAAAC/loading-fast.gif');
+      return Center(child: Image.network('https://c.tenor.com/7NX24XoJX0MAAAAC/loading-fast.gif'));
     } else {
       return ListView.builder(
-        controller: ScrollController(),
+        controller: _scrollController,
         itemCount: jsonTransformed.length,
         itemBuilder: (BuildContext context, int index) {
           return ListTile(

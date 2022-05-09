@@ -54,7 +54,7 @@ class Gate extends StatefulWidget {
 }
 
 class _GateState extends State<Gate> {
-  int _selectedIndex = 8;
+  int _selectedIndex = 7;
   static const List<Widget> _widgetOptions = <Widget>[
     Calculator(),
     TestSetState(),
