@@ -39,7 +39,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const MaterialApp(
-      title: '########################',
+      title: 'fluttermon',
       debugShowCheckedModeBanner: false,
       home: Gate(),
     );
@@ -54,7 +54,7 @@ class Gate extends StatefulWidget {
 }
 
 class _GateState extends State<Gate> {
-  int _selectedIndex = 7;
+  int _selectedIndex = 8;
   static const List<Widget> _widgetOptions = <Widget>[
     Calculator(),
     TestSetState(),

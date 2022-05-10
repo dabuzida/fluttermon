@@ -12,10 +12,12 @@ class _PproviderState extends State<Pprovider> {
   @override
   Widget build(BuildContext context) {
     return Provider<Counter>(
-      // Counter에 대한 Provider를 생성했다.
-      create: (_) => Counter(),
-      // child: Center(child: Text(),) // Counter의 숫자를 보여주는 위젯이 들어갈 것이다.
-    );
+        // Counter에 대한 Provider를 생성했다.
+        create: (_) => Counter(),
+        child: Center(
+          child: Text('d'),
+        ) // Counter의 숫자를 보여주는 위젯이 들어갈 것이다.
+        );
   }
 }
 
