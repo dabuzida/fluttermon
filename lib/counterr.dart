@@ -1,18 +1,47 @@
 import 'package:flutter/material.dart';
 
-class TestSetState extends StatefulWidget {
-  const TestSetState({Key? key}) : super(key: key);
+class Counterr extends StatefulWidget {
+  const Counterr({Key? key}) : super(key: key);
 
   @override
-  State<TestSetState> createState() => _TestSetStateState();
+  State<Counterr> createState() => _CounterrState();
 }
 
-class _TestSetStateState extends State<TestSetState> {
+class _CounterrState extends State<Counterr> {
+  Person p = Person();
   int i = 0;
   final double _width = 700;
+  // static const double _width = 700;
   final double _height = 700;
   @override
+  void initState() {
+    super.initState(); // initState()의 처음에 위치해야함
+    print('initState');
+  }
+
+  @override
+  void didChangeDependencies() {
+    print('didChangeDependencies');
+    super.didChangeDependencies();
+    print('didChangeDependencies2');
+  }
+
+  @override
+  void dispose() {
+    print('dispose');
+    p.dispose();
+    super.dispose(); // dispose()의 마지막에 위치해야
+  }
+
+  @override
+  void deactivate() {
+    print('deactivate');
+    super.deactivate();
+  }
+
+  @override
   Widget build(BuildContext context) {
+    print('build()');
     return Center(
       child: Container(
         color: Colors.white,
@@ -53,7 +82,6 @@ class _TestSetStateState extends State<TestSetState> {
   Widget _decrease() {
     return TextButton(
       onPressed: () {
-        print(i);
         setState(() {
           i--;
         });
@@ -95,5 +123,14 @@ class _TestSetStateState extends State<TestSetState> {
         ),
       ),
     );
+  }
+}
+
+class Person {
+  String? name;
+  int? age;
+
+  void dispose() {
+    print('Person dispose()');
   }
 }

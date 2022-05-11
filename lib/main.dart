@@ -8,16 +8,15 @@ import 'package:fluttermon/lavoratory.dart';
 
 // 만든 프로젝트 모듈로 분리하여 관리
 import 'calculator.dart';
+import 'counterr.dart';
 import 'factory.dart';
-import 'pprovider.dart';
+import 'table_roww.dart';
 import 'red.dart';
 import 'test_datetime.dart';
 import 'laboratory.dart';
 
 import 'test1.dart';
 import 'package:fluttermon/test3.dart';
-
-import 'test_setstate.dart';
 
 void showLayoutGuidelines() {
   debugPaintSizeEnabled = true;
@@ -57,14 +56,14 @@ class _GateState extends State<Gate> {
   int _selectedIndex = 8;
   static const List<Widget> _widgetOptions = <Widget>[
     Calculator(),
-    TestSetState(),
+    Counterr(),
     TestDateTime(),
     Laboratory(),
     Red(),
     Factory(),
     Lavoratory(),
     Lavoratery(),
-    Pprovider(),
+    TableRoww(),
   ];
   Widget _indexedStack() {
     return IndexedStack(
