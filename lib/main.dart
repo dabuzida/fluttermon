@@ -10,7 +10,7 @@ import 'package:fluttermon/lavoratory.dart';
 import 'calculator.dart';
 import 'counterr.dart';
 import 'factory.dart';
-import 'table_roww.dart';
+import 'table_family.dart';
 import 'red.dart';
 import 'test_datetime.dart';
 import 'laboratory.dart';
@@ -63,7 +63,7 @@ class _GateState extends State<Gate> {
     Factory(),
     Lavoratory(),
     Lavoratery(),
-    TableRoww(),
+    TableFamily(),
   ];
   Widget _indexedStack() {
     return IndexedStack(
@@ -107,12 +107,12 @@ class _GateState extends State<Gate> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: Colors.orangeAccent[100],
+      backgroundColor: Colors.lightGreenAccent[50],
       appBar: _appbar(),
-      body: /* Center(
+      body: _indexedStack(),
+      /* Center(
         child: _widgetOptions.elementAt(_selectedIndex),
       ), */
-          _indexedStack(),
       bottomNavigationBar: BottomNavigationBar(
         currentIndex: _selectedIndex,
         onTap: _onItemTapped,
