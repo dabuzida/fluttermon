@@ -10,6 +10,7 @@ import 'package:fluttermon/lavoratory.dart';
 import 'calculator.dart';
 import 'counterr.dart';
 import 'factory.dart';
+import 'static_tab.dart';
 import 'table_family.dart';
 import 'red.dart';
 import 'test_datetime.dart';
@@ -53,7 +54,7 @@ class Gate extends StatefulWidget {
 }
 
 class _GateState extends State<Gate> {
-  int _selectedIndex = 8;
+  int _selectedIndex = 9;
   static const List<Widget> _widgetOptions = <Widget>[
     Calculator(),
     Counterr(),
@@ -64,6 +65,7 @@ class _GateState extends State<Gate> {
     Lavoratory(),
     Lavoratery(),
     TableFamily(),
+    StaticTab(),
   ];
   Widget _indexedStack() {
     return IndexedStack(
@@ -96,7 +98,9 @@ class _GateState extends State<Gate> {
                                   ? Text(_widgetOptions[6].toString())
                                   : _selectedIndex == 7
                                       ? Text(_widgetOptions[7].toString())
-                                      : Text(_widgetOptions[8].toString()),
+                                      : _selectedIndex == 8
+                                          ? Text(_widgetOptions[8].toString())
+                                          : Text(_widgetOptions[9].toString()),
       elevation: 0,
       foregroundColor: Colors.yellow[300],
       backgroundColor: Colors.purple,
@@ -163,6 +167,11 @@ class _GateState extends State<Gate> {
           BottomNavigationBarItem(
             icon: const Icon(Icons.sailing),
             label: _widgetOptions[8].toString(),
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.light),
+            label: _widgetOptions[9].toString(),
             backgroundColor: Colors.blue,
           ),
         ],
