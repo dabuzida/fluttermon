@@ -10,6 +10,7 @@ import 'package:fluttermon/lavoratory.dart';
 import 'calculator.dart';
 import 'counterr.dart';
 import 'factory.dart';
+import 'stackk.dart';
 import 'static_tab.dart';
 import 'table_family.dart';
 import 'red.dart';
@@ -66,6 +67,7 @@ class _GateState extends State<Gate> {
     Lavoratery(),
     TableFamily(),
     StaticTab(),
+    Stackk(),
   ];
   Widget _indexedStack() {
     return IndexedStack(
@@ -100,7 +102,9 @@ class _GateState extends State<Gate> {
                                       ? Text(_widgetOptions[7].toString())
                                       : _selectedIndex == 8
                                           ? Text(_widgetOptions[8].toString())
-                                          : Text(_widgetOptions[9].toString()),
+                                          : _selectedIndex == 9
+                                              ? Text(_widgetOptions[9].toString())
+                                              : Text(_widgetOptions[10].toString()),
       elevation: 0,
       foregroundColor: Colors.yellow[300],
       backgroundColor: Colors.purple,
@@ -172,6 +176,11 @@ class _GateState extends State<Gate> {
           BottomNavigationBarItem(
             icon: const Icon(Icons.light),
             label: _widgetOptions[9].toString(),
+            backgroundColor: Colors.blue,
+          ),
+          BottomNavigationBarItem(
+            icon: const Icon(Icons.stacked_bar_chart),
+            label: _widgetOptions[10].toString(),
             backgroundColor: Colors.blue,
           ),
         ],
