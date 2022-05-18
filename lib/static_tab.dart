@@ -34,6 +34,12 @@ class _StaticTabState extends State<StaticTab> {
     });
   }
 
+  final List _tapPhrase = [
+    {'num': '01', 'title': '고객 추가'},
+    {'num': '02', 'title': '새 캠페인'},
+    {'num': '03', 'title': '알츠윈 콜'},
+  ];
+  final Color _tabPhraseColor = const Color.fromARGB(255, 0, 71, 255);
   /* @override
   void initState() {
     super.initState();
@@ -42,36 +48,44 @@ class _StaticTabState extends State<StaticTab> {
     _miniTabCColor = _inactiveColor;
   } */
 
-  final List _tapPhrase = [
-    {'num': '01', 'title': '고객 추가'},
-    {'num': '02', 'title': '새 캠페인'},
-    {'num': '03', 'title': '알츠윈 콜'},
-  ];
-  final Color _tabPhraseColor = const Color.fromARGB(255, 0, 71, 255);
-
   @override
   Widget build(BuildContext context) {
-    return Center(
-      child: Container(
-        width: 700,
-        height: 500,
-        color: Colors.white,
-        // color: Colors.purple,
-        child: Stack(children: <Widget>[
-          Row(
-            children: <Widget>[
-              _lowerTab(id: 0),
-              const SizedBox(width: 10),
-              _lowerTab(id: 1),
-              const SizedBox(width: 10),
-              _lowerTab(id: 2),
-            ],
+    return Container(
+      color: Colors.white,
+      // padding: EdgeInsets.symmetric(horizontal: 50),
+      // width: 1000,
+      width: MediaQuery.of(context).size.width,
+      padding: EdgeInsets.symmetric(horizontal: 50),
+
+      height: 500,
+      // constraints: const BoxConstraints(
+      //   maxWidth: 700,
+      //   minHeight: 500,
+      // ),
+      // constraints: BoxConstraints.expand(),
+      child: Stack(
+        // alignment: Alignment.bottomCenter,
+        // clipBehavior: Clip.antiAliasWithSaveLayer,
+        // fit: StackFit.passthrough,
+        children: <Widget>[
+          Positioned(
+            child: Row(
+              children: <Widget>[
+                _lowerTab(id: 0),
+                const SizedBox(width: 10),
+                _lowerTab(id: 1),
+                const SizedBox(width: 10),
+                _lowerTab(id: 2),
+              ],
+            ),
           ),
           Positioned(
             top: 60,
             child: Container(
-              width: 700,
+              // width: 700,
+              width: MediaQuery.of(context).size.width - 200,
               height: 400,
+              // margin: EdgeInsets.only(right: 10),
               decoration: BoxDecoration(
                 color: _activeColor,
                 border: Border.all(color: _borderColor, width: 1),
@@ -82,48 +96,52 @@ class _StaticTabState extends State<StaticTab> {
                 ),
               ),
               child: Center(
-                  child: Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Container(
-                        width: 200,
-                        height: 200,
-                        decoration: const BoxDecoration(
-                          color: Colors.amber,
-                          borderRadius: BorderRadius.only(
-                            topLeft: Radius.circular(100),
-                            topRight: Radius.circular(100),
-                            // bottomLeft: Radius.circular(40.0),
-                            bottomRight: Radius.circular(40.0),
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Container(
+                          width: 200,
+                          height: 200,
+                          decoration: const BoxDecoration(
+                            color: Colors.amber,
+                            borderRadius: BorderRadius.only(
+                              topLeft: Radius.circular(100),
+                              topRight: Radius.circular(100),
+                              // bottomLeft: Radius.circular(40.0),
+                              bottomRight: Radius.circular(40.0),
+                            ),
                           ),
                         ),
-                      ),
-                      Container(color: Color.fromARGB(255, 178, 180, 17), width: 50, height: 50),
-                      Container(color: Color.fromARGB(255, 14, 115, 216), width: 50, height: 50),
-                      Container(color: Color.fromARGB(255, 189, 22, 22), width: 50, height: 50),
-                      Container(color: Color.fromARGB(255, 15, 124, 160), width: 50, height: 50),
-                    ],
-                  ),
-                ],
-              )),
+                        Container(color: Color.fromARGB(255, 178, 180, 17), width: 50, height: 50),
+                        // Container(color: Color.fromARGB(255, 14, 115, 216), width: 50, height: 50),
+                        // Container(color: Color.fromARGB(255, 189, 22, 22), width: 50, height: 50),
+                        Container(color: Color.fromARGB(255, 15, 124, 160), width: 50, height: 50),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
             ),
           ),
           Positioned(
-              top: 1,
-              child: Row(
-                children: [
-                  const SizedBox(width: 1),
-                  _upperTab(id: 0, visible: _visibleA),
-                  const SizedBox(width: 12),
-                  _upperTab(id: 1, visible: _visibleB),
-                  const SizedBox(width: 12),
-                  _upperTab(id: 2, visible: _visibleC),
-                ],
-              )),
-        ]),
+            top: 1,
+            child: Row(
+              mainAxisSize: MainAxisSize.min,
+              // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: <Widget>[
+                const SizedBox(width: 1),
+                _upperTab(id: 0, visible: _visibleA),
+                const SizedBox(width: 12),
+                _upperTab(id: 1, visible: _visibleB),
+                const SizedBox(width: 12),
+                _upperTab(id: 2, visible: _visibleC),
+              ],
+            ),
+          ),
+        ],
       ),
     );
   }
@@ -140,11 +158,27 @@ class _StaticTabState extends State<StaticTab> {
           topRight: Radius.circular(5), // bottomRight: Radius.circular(40.0),
         ),
       ),
+      child: Center(
+        child: Row(children: <Widget>[
+          const SizedBox(
+            width: 4,
+            height: 40,
+          ),
+          const SizedBox(width: 8),
+          Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: <Widget>[
+              Text(_tapPhrase[id]['num']),
+              Text(_tapPhrase[id]['title']),
+            ],
+          )
+        ]),
+      ),
     );
   }
 
   Widget _upperTab({required int id, required bool visible}) {
-    var sizedBox = SizedBox(width: 8);
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -173,9 +207,10 @@ class _StaticTabState extends State<StaticTab> {
                     height: 40,
                     color: _tabPhraseColor,
                   ),
-                  sizedBox,
+                  const SizedBox(width: 8),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
                       Text(_tapPhrase[id]['num'], style: TextStyle(color: _tabPhraseColor)),
                       Text(_tapPhrase[id]['title'], style: TextStyle(color: _tabPhraseColor)),
