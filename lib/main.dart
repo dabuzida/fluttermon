@@ -11,7 +11,7 @@ import 'calculator.dart';
 import 'counterr.dart';
 import 'factory.dart';
 import 'stackk.dart';
-import 'static_tab.dart';
+import 'static_tap.dart';
 import 'table_family.dart';
 import 'red.dart';
 import 'test_datetime.dart';
@@ -67,7 +67,7 @@ class _GateState extends State<Gate> {
     Lavoratory(),
     Lavoratery(),
     TableFamily(),
-    StaticTab(),
+    StaticTap(),
     Stackk(),
   ];
   Widget _indexedStack() {

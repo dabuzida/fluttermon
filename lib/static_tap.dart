@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 
-class StaticTab extends StatefulWidget {
-  const StaticTab({Key? key}) : super(key: key);
+class StaticTap extends StatefulWidget {
+  const StaticTap({Key? key}) : super(key: key);
 
   @override
-  State<StaticTab> createState() => _StaticTabState();
+  State<StaticTap> createState() => _StaticTapState();
 }
 
-class _StaticTabState extends State<StaticTab> {
+class _StaticTapState extends State<StaticTap> {
   // List items = ['field1', 'field2', 'field3'];
   int _selectedIndex = 0;
   final Color _activeColor = const Color.fromARGB(255, 243, 245, 247);
@@ -39,13 +39,13 @@ class _StaticTabState extends State<StaticTab> {
     {'num': '02', 'title': '새 캠페인'},
     {'num': '03', 'title': '알츠윈 콜'},
   ];
-  final Color _tabPhraseColor = const Color.fromARGB(255, 0, 71, 255);
+  final Color _tapPhraseColor = const Color.fromARGB(255, 0, 71, 255);
   /* @override
   void initState() {
     super.initState();
-    _miniTabAColor = _activeColor;
-    _miniTabBColor = _inactiveColor;
-    _miniTabCColor = _inactiveColor;
+    _miniTapAColor = _activeColor;
+    _miniTapBColor = _inactiveColor;
+    _miniTapCColor = _inactiveColor;
   } */
 
   @override
@@ -56,8 +56,9 @@ class _StaticTabState extends State<StaticTab> {
       // width: 1000,
       width: MediaQuery.of(context).size.width,
       padding: EdgeInsets.symmetric(horizontal: 50),
+      height: MediaQuery.of(context).size.height,
 
-      height: 500,
+      // height: 500,
       // constraints: const BoxConstraints(
       //   maxWidth: 700,
       //   minHeight: 500,
@@ -71,11 +72,11 @@ class _StaticTabState extends State<StaticTab> {
           Positioned(
             child: Row(
               children: <Widget>[
-                _lowerTab(id: 0),
+                _lowerTap(id: 0),
                 const SizedBox(width: 10),
-                _lowerTab(id: 1),
+                _lowerTap(id: 1),
                 const SizedBox(width: 10),
-                _lowerTab(id: 2),
+                _lowerTap(id: 2),
               ],
             ),
           ),
@@ -84,7 +85,7 @@ class _StaticTabState extends State<StaticTab> {
             child: Container(
               // width: 700,
               width: MediaQuery.of(context).size.width - 200,
-              height: 400,
+              height: MediaQuery.of(context).size.height,
               // margin: EdgeInsets.only(right: 10),
               decoration: BoxDecoration(
                 color: _activeColor,
@@ -97,8 +98,19 @@ class _StaticTabState extends State<StaticTab> {
               ),
               child: Center(
                 child: Column(
-                  mainAxisAlignment: MainAxisAlignment.center,
+                  // mainAxisAlignment: MainAxisAlignment.center,
                   children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      children: [
+                        Row(children: [
+                          Container(width: 50, height: 50, color: Colors.blue),
+                          Container(width: 50, height: 50, color: Colors.yellow),
+                          Container(width: 50, height: 50, color: Colors.red),
+                        ]),
+                        Container(width: 50, height: 50, color: Colors.teal),
+                      ],
+                    ),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
@@ -121,6 +133,22 @@ class _StaticTabState extends State<StaticTab> {
                         Container(color: Color.fromARGB(255, 15, 124, 160), width: 50, height: 50),
                       ],
                     ),
+                    Container(
+                      width: 200,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.green,
+                        border: Border.all(color: Colors.blueAccent, width: 10),
+                      ),
+                    ),
+                    Container(
+                      width: 200,
+                      height: 100,
+                      decoration: BoxDecoration(
+                        color: Colors.yellow,
+                        border: Border.all(color: Colors.red, width: 5),
+                      ),
+                    ),
                   ],
                 ),
               ),
@@ -133,11 +161,11 @@ class _StaticTabState extends State<StaticTab> {
               // mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
                 const SizedBox(width: 1),
-                _upperTab(id: 0, visible: _visibleA),
+                _upperTap(id: 0, visible: _visibleA),
                 const SizedBox(width: 12),
-                _upperTab(id: 1, visible: _visibleB),
+                _upperTap(id: 1, visible: _visibleB),
                 const SizedBox(width: 12),
-                _upperTab(id: 2, visible: _visibleC),
+                _upperTap(id: 2, visible: _visibleC),
               ],
             ),
           ),
@@ -146,7 +174,7 @@ class _StaticTabState extends State<StaticTab> {
     );
   }
 
-  Widget _lowerTab({required int id}) {
+  Widget _lowerTap({required int id}) {
     return Container(
       width: 130,
       height: 61,
@@ -178,7 +206,7 @@ class _StaticTabState extends State<StaticTab> {
     );
   }
 
-  Widget _upperTab({required int id, required bool visible}) {
+  Widget _upperTap({required int id, required bool visible}) {
     return MouseRegion(
       cursor: SystemMouseCursors.click,
       child: GestureDetector(
@@ -205,15 +233,15 @@ class _StaticTabState extends State<StaticTab> {
                   Container(
                     width: 4,
                     height: 40,
-                    color: _tabPhraseColor,
+                    color: _tapPhraseColor,
                   ),
                   const SizedBox(width: 8),
                   Column(
                     mainAxisAlignment: MainAxisAlignment.center,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: <Widget>[
-                      Text(_tapPhrase[id]['num'], style: TextStyle(color: _tabPhraseColor)),
-                      Text(_tapPhrase[id]['title'], style: TextStyle(color: _tabPhraseColor)),
+                      Text(_tapPhrase[id]['num'], style: TextStyle(color: _tapPhraseColor)),
+                      Text(_tapPhrase[id]['title'], style: TextStyle(color: _tapPhraseColor)),
                     ],
                   )
                 ]),
