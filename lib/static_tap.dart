@@ -51,12 +51,12 @@ class _StaticTapState extends State<StaticTap> {
   @override
   Widget build(BuildContext context) {
     return Container(
-      color: Colors.white,
+      color: Colors.lightGreen[100],
       // padding: EdgeInsets.symmetric(horizontal: 50),
       // width: 1000,
-      width: MediaQuery.of(context).size.width,
+      width: 1700,
       padding: EdgeInsets.symmetric(horizontal: 50),
-      height: MediaQuery.of(context).size.height,
+      height: 800,
 
       // height: 500,
       // constraints: const BoxConstraints(
@@ -69,14 +69,50 @@ class _StaticTapState extends State<StaticTap> {
         // clipBehavior: Clip.antiAliasWithSaveLayer,
         // fit: StackFit.passthrough,
         children: <Widget>[
+          // Positioned(
+          //   child: Row(
+          //     children: <Widget>[
+          //       _lowerTap(id: 0),
+          //       const SizedBox(width: 10),
+          //       _lowerTap(id: 1),
+          //       const SizedBox(width: 10),
+          //       _lowerTap(id: 2),
+          //     ],
+          //   ),
+          // ),
           Positioned(
+            left: 0,
+            top: 0,
+            right: 0,
             child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: <Widget>[
-                _lowerTap(id: 0),
-                const SizedBox(width: 10),
-                _lowerTap(id: 1),
-                const SizedBox(width: 10),
-                _lowerTap(id: 2),
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    mainAxisSize: MainAxisSize.min,
+                    children: const <Widget>[
+                      Expanded(
+                        child: Text('data'),
+                      ),
+                      Expanded(
+                        child: Text('data'),
+                      ),
+                      Expanded(
+                        child: Text('data'),
+                      ),
+                    ],
+                  ),
+                ),
+                Expanded(
+                  flex: 1,
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.end,
+                    children: <Widget>[
+                      _introduceMenuTap(),
+                    ],
+                  ),
+                ),
               ],
             ),
           ),
@@ -154,7 +190,7 @@ class _StaticTapState extends State<StaticTap> {
               ),
             ),
           ),
-          Positioned(
+          /* Positioned(
             top: 1,
             child: Row(
               mainAxisSize: MainAxisSize.min,
@@ -168,8 +204,30 @@ class _StaticTapState extends State<StaticTap> {
                 _upperTap(id: 2, visible: _visibleC),
               ],
             ),
-          ),
+          ), */
         ],
+      ),
+    );
+  }
+
+  Widget _introduceMenuTap() {
+    return Container(
+      // width: (MediaQuery.of(context).size.width - 700) / 2,
+      width: 200,
+      height: 40,
+      constraints: BoxConstraints(
+        minWidth: 70,
+        maxWidth: 130,
+      ),
+      decoration: BoxDecoration(
+        color: _activeColor,
+        border: Border.all(color: _borderColor, width: 1),
+        borderRadius: BorderRadius.all(Radius.circular(30.0)),
+      ),
+      child: Center(
+        child: Text(
+          '메뉴 소개',
+        ),
       ),
     );
   }
