@@ -107,8 +107,8 @@ class _GateState extends State<Gate> {
                                               ? Text(_widgetOptions[9].toString())
                                               : Text(_widgetOptions[10].toString()),
       elevation: 0,
-      foregroundColor: Colors.yellow[300],
-      backgroundColor: Colors.purple,
+      foregroundColor: Colors.cyanAccent,
+      backgroundColor: Colors.black,
       centerTitle: true,
     );
   }
