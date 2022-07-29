@@ -83,6 +83,7 @@ class _LavoratoryState extends State<Lavoratory> {
       // return Image.network('https://mir-s3-cdn-cf.behance.net/project_modules/fs/b6e0b072897469.5bf6e79950d23.gif');
       // https://img.pikbest.com/png-images/20190918/cartoon-snail-loading-loading-gif-animation_2734139.png!c1024wm0
     } else {
+      print('test');
       return Center(
         child: ListTile(
           leading: Text(jsonTransformed.userId),
