@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:fluttermon/fruit_controller.dart';
 
 class TestSetState extends StatefulWidget {
   const TestSetState({Key? key}) : super(key: key);
@@ -18,7 +19,7 @@ class _TestSetStateState extends State<TestSetState> {
         color: Colors.white,
         width: _width,
         height: _height,
-        child: Column(
+        child: ListView(
           children: <Widget>[
             _display(),
             Row(
@@ -26,7 +27,23 @@ class _TestSetStateState extends State<TestSetState> {
                 Expanded(child: _decrease()),
                 Expanded(child: _increase()),
               ],
-            )
+            ),
+            Wrap(
+              children: [
+                ElevatedButton(
+                  child: Text('Banana'),
+                  onPressed: () {
+                    FruitController().setName(name: 'Banana');
+                  },
+                ),
+                ElevatedButton(
+                  child: Text('Apple'),
+                  onPressed: () {
+                    FruitController().setName(name: 'Apple');
+                  },
+                ),
+              ],
+            ),
           ],
         ),
       ),

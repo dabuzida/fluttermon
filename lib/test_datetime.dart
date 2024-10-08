@@ -1,5 +1,6 @@
 import 'dart:collection';
 import 'package:flutter/material.dart';
+import 'package:fluttermon/fruit_controller.dart';
 import 'package:intl/intl.dart';
 
 class TestDateTime extends StatefulWidget {
@@ -61,6 +62,14 @@ class _TestDateTimeState extends State<TestDateTime> {
           Text(p1.timeCreated),
           Text(formatted),
           Text(formatted2),
+          AnimatedBuilder(
+            animation: FruitController(),
+            builder: (BuildContext context, Widget? child) {
+              print('>> AnimatedBuilder2');
+
+              return Text('>> ${FruitController().name} <<');
+            },
+          ),
         ],
       ),
     );

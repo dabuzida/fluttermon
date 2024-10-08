@@ -92,7 +92,6 @@ class _OrangeState extends State<Orange> {
 
   @override
   Widget build(BuildContext context) {
-    print('orange');
     return Container(
       width: 100,
       height: 100,
